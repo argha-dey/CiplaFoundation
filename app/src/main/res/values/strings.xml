@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Cipla Foundation</string>
+    <string name="no_internet">No network connection found! Please check your network connection.</string>
+    <string name="credentials_missmatch">Your present credentials do not match with your last login credentials!\nPlease enter proper credentials.</string>
+    <string name="response_timeout">Response time out error! Please check your internet connection and try again.</string>
+    <string name="auth_failure">Server authentication failed! Please try again.</string>
+    <string name="server_error">Server isn\'t responding! Please try again.</string>
+    <string name="network_error">Network not found! Please check your internet connection and try again.</string>
+    <string name="parse_error">Unable to parse Data! Please try again.</string>
+    <string name="proposal">PROPOSAL</string>
+    <string name="project">PROJECT</string>
+    <string name="event">EVENT</string>
+    <string name="general">GENERAL INFORMATION</string>
+    <string name="schedule">Schedule VII of Section 135</string>
+    <string name="type">Type of Organization</string>
+    <string name="ngo">NGO/Vendor</string>
+    <string name="fund_duration">Duration of Funding</string>
+    <string name="proposal_det">PROPOSAL DETAILS</string>
+    <string name="title">Proposal Title</string>
+    <string name="proposal_det_brief">Proposal Details in Brief</string>
+    <string name="timeline">Timeline of Project</string>
+    <string name="prop_duration">Proposal Duration</string>
+    <string name="fund_req">Fund Requested (INR)</string>
+    <string name="district">District</string>
+    <string name="block">Block/Taluka</string>
+    <string name="vill">Village</string>
+    <string name="loc">Location</string>
+    <string name="distance">Distance from Unit(Km)</string>
+    <string name="benificiary">Profile of Benificiaries</string>
+    <string name="rationale">Rationale for this Project</string>
+
+    <string name="raavi_bold">font/RAAVIB_3.ttf</string>
+    <string name="raavi_regular">font/RAAVI_3.ttf</string>
+
+
+
+</resources>

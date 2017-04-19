@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="textSize">10dp</dimen>
+    <dimen name="textheading">18sp</dimen>
+    <dimen name="texttitle">15sp</dimen>
+    <dimen name="textSubList">14sp</dimen>
+    <dimen name="textSubListChild">12sp</dimen>
+
+    <dimen name="textSubList_margin_Top">15dp</dimen>
+    <dimen name="textSubListChild_margin_Top">1dp</dimen>
+    <dimen name="rl_child_marginBottom">10dp</dimen>
+    <dimen name="rl_child_first_marginTop">10dp</dimen>
+    <dimen name="rl_child_last_marginBottom">10dp</dimen>
+
+
+    <!-- Default screen margins, per the Android Design guidelines. -->
+
+
+    <!-- For all screen layouts -->
+
+    <dimen name="edit_text_size">25sp</dimen>
+    <dimen name="tv_text_size_ten">10sp</dimen>
+    <dimen name="tv_text_size_twelve">12sp</dimen>
+    <dimen name="tv_text_size_fourteen">14sp</dimen>
+    <dimen name="tv_text_size_fifteen">15sp</dimen>
+    <dimen name="tv_text_size_sixteen">16sp</dimen>
+    <dimen name="button_text_size_fifteen">15sp</dimen>
+    <dimen name="level_text_size_fifteen">15sp</dimen>
+    <dimen name="button_text_size_eighteen">18sp</dimen>
+    <dimen name="button_text_size_twenty">20sp</dimen>
+    <dimen name="small_text_size">12sp</dimen>
+    <dimen name="big_text_size">40sp</dimen>
+
+    <dimen name="margin_one">1dp</dimen>
+    <dimen name="margin_five">5dp</dimen>
+    <dimen name="margin_seven">7dp</dimen>
+    <dimen name="margin_eight">8dp</dimen>
+    <dimen name="margin_ten">10dp</dimen>
+    <dimen name="margin_fifteen">15dp</dimen>
+    <dimen name="margin_forty_five">45dp</dimen>
+    <dimen name="padding_one">1dp</dimen>
+    <dimen name="padding_two">2dp</dimen>
+    <dimen name="padding_three">3dp</dimen>
+    <dimen name="padding_four">4dp</dimen>
+    <dimen name="padding_five">5dp</dimen>
+    <dimen name="padding_six">6dp</dimen>
+    <dimen name="padding_thirteen">13dp</dimen>
+    <dimen name="padding_fifty">50dp</dimen>
+
+    <dimen name="list_divider_one">1dp</dimen>
+
+    <dimen name="level_list_item_view_height">50dp</dimen>
+    <dimen name="enlarged_image_view_height">200dp</dimen>
+    <dimen name="levels_item_view_height">260dp</dimen>
+    <dimen name="event_details_layout_height">285dp</dimen>
+    <dimen name="event_details_header_layout_height">250dp</dimen>
+    <dimen name="dashboard_button_height">35dp</dimen>
+    <dimen name="breadcrumb_button_height">30dp</dimen>
+    <dimen name="event_details_header_text_view_height">30dp</dimen>
+    <dimen name="image_chooser_dialog_layout_height">150dp</dimen>
+
+    <dimen name="image_chooser_dialog_button_height">43dp</dimen>
+    <dimen name="image_chooser_dialog_button_width">174dp</dimen>
+
+    <dimen name="event_list_image_height">50dp</dimen>
+    <dimen name="event_list_image_width">50dp</dimen>
+
+    <dimen name="form_entry_edit_text_width">150dp</dimen>
+
+    <dimen name="year_view_layout_height">30dp</dimen>
+    <dimen name="form_image_view_layout_height">30dp</dimen>
+
+    <dimen name="unit_details_header_layout_height">35dp</dimen>
+    <dimen name="unit_details_header_frame_width">150dp</dimen>
+    <dimen name="unit_details_content_frame_width">150dp</dimen>
+
+    <dimen name="upload_image_button_width">174dp</dimen>
+    <dimen name="upload_image_button_height">43dp</dimen>
+
+    <dimen name="form_send_button_width">174dp</dimen>
+    <dimen name="form_send_button_height">43dp</dimen>
+
+    <dimen name="attached_image_view_width">250dp</dimen>
+    <dimen name="attached_image_view_height">200dp</dimen>
+
+    <dimen name="list_image_button_height">50dp</dimen>
+    <dimen name="list_image_button_width">50dp</dimen>
+
+    <dimen name="level_list_text_view_width">200dp</dimen>
+
+    <dimen name="web_host_button_width">150dp</dimen>
+
+    <dimen name="dropdown_holder_height">45dp</dimen>
+
+    <dimen name="cal_arrow_button_height">30dp</dimen>
+    <dimen name="cal_arrow_button_width">40dp</dimen>
+
+    <dimen name="title">17dp</dimen>
+    <dimen name="rating">15dp</dimen>
+    <dimen name="genre">13dp</dimen>
+    <dimen name="year">12dp</dimen>
+
+    <dimen name="event_title_textview_width">190dp</dimen>
+
+
+    <dimen name="activity_title_view_width">250dp</dimen>
+
+
+    <dimen name="dashboard_report_button_height">70dp</dimen>
+    <dimen name="dashboard_report_button_width">250dp</dimen>
+
+    <dimen name="custom_action_bar_height">45dp</dimen>
+    <dimen name="event_title_header_layout_height">45dp</dimen>
+    <dimen name="divider_height_one">1dp</dimen>
+
+    <dimen name="event_list_imageview_height">80dp</dimen>
+    <dimen name="event_list_imageview_width">80dp</dimen>
+
+    <dimen name="spinner_image_height">33dp</dimen>
+    <dimen name="spinner_image_width">33dp</dimen>
+
+    <dimen name="form_field_layout_height">30dp</dimen>
+
+    <dimen name="add_button_height">30dp</dimen>
+    <dimen name="add_button_width">30dp</dimen>
+
+
+    <dimen name="unit_list_imageview_height">70dp</dimen>
+    <dimen name="unit_list_imageview_width">70dp</dimen>
+
+    <dimen name="event_details_cancel_button_height">30dp</dimen>
+    <dimen name="event_details_cancel_button_width">30dp</dimen>
+
+    <dimen name="event_details_title_view_width">250dp</dimen>
+
+    <dimen name="custom_dialog_width">250dp</dimen>
+
+
+    <dimen name="custom_tag_unit_dialog_width">350dp</dimen>
+    <dimen name="custom_tag_unit_dialog_height">250dp</dimen>
+
+    <dimen name="calendar_view_height">400dp</dimen>
+
+    <dimen name="add_event_cal_button_height">25dp</dimen>
+    <dimen name="add_event_cal_button_width">15dp</dimen>
+
+    <dimen name="add_activity_form_cal_button_height">25dp</dimen>
+    <dimen name="add_activity_form_cal_button_width">25dp</dimen>
+
+
+    <dimen name="add_event_edittext_height">35dp</dimen>
+
+    <dimen name="horizontal_padding_four">4dp</dimen>
+    <dimen name="vertical_padding_two">2dp</dimen>
+    <dimen name="image_gridview_width">100dp</dimen>
+    <dimen name="image_gridview_height">100dp</dimen>
+
+    <dimen name="event_button_height">35dp</dimen>
+    <dimen name="event_button_width">35dp</dimen>
+
+    <dimen name="login_holder_layout_width">333dp</dimen>
+    <dimen name="login_holder_layout_height">353dp</dimen>
+
+    <dimen name="login_logo_width">133dp</dimen>
+    <dimen name="login_logo_height">64dp</dimen>
+
+    <dimen name="dialog_done_button_width">100dp</dimen>
+    <dimen name="dialog_done_button_height">35dp</dimen>
+
+    <dimen name="dialog_checkbox_width">26dp</dimen>
+    <dimen name="dialog_checkbox_height">26dp</dimen>
+
+    <dimen name="search_icon_width">30dp</dimen>
+    <dimen name="search_icon_height">30dp</dimen>
+
+
+</resources>

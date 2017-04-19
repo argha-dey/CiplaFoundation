@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tv_info_division_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Division"/>
+
+    <TextView
+        android:id="@+id/tv_click_here"
+        android:layout_below="@+id/tv_info_division_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/login_btn_unclicked"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Click Here"
+        android:clickable="true"/>
+
+</RelativeLayout>

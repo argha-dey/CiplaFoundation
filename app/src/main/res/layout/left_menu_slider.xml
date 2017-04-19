@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    android:background="#838383"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/rl_dropdownHolder"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_height="@dimen/dropdown_holder_height"
+        android:shadowColor="#dd000000"
+
+        android:background="@drawable/white_darkgrey_border_box" >
+        <ImageView
+            android:id="@+id/iv_searchIcon"
+            android:layout_width="@dimen/search_icon_width"
+            android:layout_height="@dimen/search_icon_height"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="@dimen/padding_two"
+            android:scaleType="fitXY"
+            android:background="@drawable/search_icon" />
+
+        <AutoCompleteTextView
+            android:id="@+id/ac_categories"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/iv_searchIcon"
+            android:clickable="true"
+            android:background="#58b0c6"
+            android:gravity="center_vertical"
+            android:completionThreshold="2"
+            android:singleLine="true"
+            android:hint="Search a level..."
+            android:textColor="#fff"
+            android:textColorHint="#000" />
+
+
+
+    </RelativeLayout>
+
+    <ListView
+        android:elevation="5dp"
+        android:id="@+id/list_slidermenu"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:choiceMode="singleChoice"
+        android:layout_marginLeft="@dimen/margin_ten"
+        android:divider="@null"
+        android:listSelector="@drawable/list_selector" />
+
+</LinearLayout>

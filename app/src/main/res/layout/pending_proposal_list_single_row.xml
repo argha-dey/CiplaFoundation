@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:cipla="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view_pending"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:layout_marginBottom="10dp"
+        card_view:cardCornerRadius="1dp"
+        card_view:cardElevation="2dp"
+        card_view:cardUseCompatPadding="false">
+
+    <RelativeLayout
+        android:id="@+id/rl_pending_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/list_shadow"
+        android:padding="10dp">
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_pending_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/ib_btn_pending_details"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:ellipsize="marquee"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:maxLines="1"
+            android:layout_marginRight="5dp"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/texttitle"
+            cipla:customFont="@string/raavi_regular"/>
+
+        <ImageButton
+            android:id="@+id/ib_btn_pending_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/iv_arrow"
+            android:background="@drawable/accrodian_details" />
+
+        <ImageView
+            android:id="@+id/iv_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/accrodian_drop" />
+    </RelativeLayout>
+</android.support.v7.widget.CardView>
+
+    <RelativeLayout
+        android:id="@+id/rl_pending_child"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/card_view_pending"
+        android:layout_marginBottom="@dimen/rl_child_marginBottom"
+        android:paddingLeft="8dp"
+        android:background="@color/listColor"
+        android:visibility="gone">
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_timeline_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="@dimen/rl_child_first_marginTop"
+            android:text="TimeLine"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubList"
+            android:textStyle="bold"
+            cipla:customFont="@string/raavi_bold" />
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_timeline_data_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_timeline_data"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="@dimen/textSubListChild_margin_Top"
+            android:text=" "
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubListChild"
+            cipla:customFont="@string/raavi_regular"/>
+
+       <!-- <TextView
+            android:id="@+id/tv_proposal_no"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_timeline_data_view"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:text="Proposal No"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubList"
+            android:textStyle="bold" />-->
+
+       <!-- <TextView
+            android:id="@+id/tv_proposal_no_data_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_proposal_no"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:text=" "
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubListChild" />-->
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_implemented_by"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_timeline_data_view"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="@dimen/textSubList_margin_Top"
+            android:text="Implement By"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubList"
+            android:textStyle="bold"
+            cipla:customFont="@string/raavi_bold"  />
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_implemented_by_NGO_data_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_implemented_by"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="@dimen/textSubListChild_margin_Top"
+            android:text=" "
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubListChild"
+            cipla:customFont="@string/raavi_regular" />
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_implemented_by_data_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_implemented_by_NGO_data_view"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="@dimen/textSubListChild_margin_Top"
+            android:text=" "
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubListChild"
+            cipla:customFont="@string/raavi_regular"/>
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_budget"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_implemented_by_data_view"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="@dimen/textSubList_margin_Top"
+            android:text="Budget (INR)"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubList"
+            android:textStyle="bold"
+            cipla:customFont="@string/raavi_bold"/>
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_budget_data_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_budget"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="@dimen/textSubListChild_margin_Top"
+            android:text=" "
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubListChild"
+            cipla:customFont="@string/raavi_regular"/>
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_created"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_budget_data_view"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="@dimen/textSubList_margin_Top"
+            android:text="Created"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubList"
+            android:textStyle="bold"
+            cipla:customFont="@string/raavi_bold"/>
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_created_data_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_created"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="@dimen/textSubListChild_margin_Top"
+            android:layout_marginBottom="@dimen/rl_child_last_marginBottom"
+            android:text=" "
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubListChild"
+            cipla:customFont="@string/raavi_regular"/>
+
+       <!-- <TextView
+            android:id="@+id/tv_approval_data_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_created_data_view"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:text="Approval"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubList"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_approval"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_approval_data_view"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:text=" "
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubListChild" />
+
+        <TextView
+            android:id="@+id/tv_action_data_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_approval"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
+            android:text="Action"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubList"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tv_action"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_action_data_view"
+            android:layout_marginLeft="5dp"
+            android:layout_marginTop="5dp"
+            android:text=" "
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubListChild" />-->
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

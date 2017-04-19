@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/listItemContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <RadioButton
+        android:id="@+id/rb_plusMinus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:button="@drawable/plus_minus_chkbx_selector"
+        android:focusable="false"
+        android:clickable="false"
+        android:focusableInTouchMode="false" />
+
+</LinearLayout>

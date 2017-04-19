@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+  <ScrollView
+      xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:cipla="http://schemas.android.com/apk/res-auto"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:layout_marginBottom="10dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+ <RelativeLayout
+     android:id="@+id/rl_general_details"
+     android:layout_width="wrap_content"
+     android:layout_height="wrap_content"
+     android:layout_marginBottom="10dp"
+     android:padding="10dp"
+     android:background="@drawable/list_shadow">
+
+    <TextView
+        android:id="@+id/tv_firstPart"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/general"
+        android:textColor="@color/login_btn_unclicked"
+        android:textSize="@dimen/texttitle"
+        android:textStyle="bold" />
+
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_schedule"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_firstPart"
+            android:layout_marginTop="@dimen/textSubList_margin_Top"
+            android:text="@string/schedule"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubList"
+            android:textStyle="bold"
+            cipla:customFont="@string/raavi_bold" />
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_schedule_data_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_schedule"
+            android:layout_marginTop="@dimen/textSubListChild_margin_Top"
+            android:text=" "
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubListChild"
+            cipla:customFont="@string/raavi_regular"/>
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_schedule_data_view"
+            android:layout_marginTop="@dimen/textSubList_margin_Top"
+            android:text="@string/type"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubList"
+            android:textStyle="bold"
+            cipla:customFont="@string/raavi_bold" />
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_type_data_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_type"
+            android:layout_marginTop="@dimen/textSubListChild_margin_Top"
+            android:text=" "
+            android:maxLines="1"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubListChild"
+            cipla:customFont="@string/raavi_regular"/>
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_ngo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_type_data_view"
+            android:layout_marginTop="@dimen/textSubList_margin_Top"
+            android:text="@string/ngo"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubList"
+            android:textStyle="bold"
+            cipla:customFont="@string/raavi_bold" />
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_ngodata_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_ngo"
+            android:layout_marginTop="@dimen/textSubListChild_margin_Top"
+            android:text=" "
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubListChild"
+            cipla:customFont="@string/raavi_regular"/>
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_fund_duration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_ngodata_view"
+            android:layout_marginTop="@dimen/textSubList_margin_Top"
+            android:text="@string/fund_duration"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubList"
+            android:textStyle="bold"
+            cipla:customFont="@string/raavi_bold" />
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_fund_duration_data_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_fund_duration"
+            android:layout_marginTop="@dimen/textSubListChild_margin_Top"
+            android:layout_marginBottom="5dp"
+            android:text=" "
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubListChild"
+            cipla:customFont="@string/raavi_regular"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_proposal_details"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:padding="10dp"
+        android:layout_below="@+id/rl_general_details"
+        android:background="@drawable/list_shadow">
+
+        <TextView
+            android:id="@+id/tv_second_part"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/proposal_det"
+            android:textColor="@color/login_btn_unclicked"
+            android:textSize="@dimen/texttitle"
+            android:textStyle="bold" />
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_proposal_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_second_part"
+            android:layout_marginTop="@dimen/textSubList_margin_Top"
+            android:text="@string/title"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubList"
+            android:textStyle="bold"
+            cipla:customFont="@string/raavi_bold" />
+
+         <com.ciplafoundation.utility.CustomTextView
+             android:id="@+id/tv_proposal_title_data_view"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_below="@+id/tv_proposal_title"
+             android:layout_marginTop="@dimen/textSubListChild_margin_Top"
+             android:text=" "
+             android:textColor="@android:color/black"
+             android:textSize="@dimen/textSubListChild"
+             cipla:customFont="@string/raavi_regular"/>
+
+         <com.ciplafoundation.utility.CustomTextView
+             android:id="@+id/tv_proposal_det_brief"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_below="@+id/tv_proposal_title_data_view"
+             android:layout_marginTop="@dimen/textSubList_margin_Top"
+             android:text="@string/proposal_det_brief"
+             android:textColor="@android:color/black"
+             android:textSize="@dimen/textSubList"
+             android:textStyle="bold"
+             cipla:customFont="@string/raavi_bold" />
+
+         <com.ciplafoundation.utility.CustomTextView
+             android:id="@+id/tv_proposal_det_brief_data_view"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_below="@+id/tv_proposal_det_brief"
+             android:layout_marginRight="5dp"
+             android:layout_marginTop="@dimen/textSubListChild_margin_Top"
+             android:text=" "
+             android:textColor="@android:color/black"
+             android:textSize="@dimen/textSubListChild"
+             cipla:customFont="@string/raavi_regular"/>
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_timeline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_proposal_det_brief_data_view"
+            android:layout_marginTop="@dimen/textSubList_margin_Top"
+            android:text="@string/timeline"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubList"
+            android:textStyle="bold"
+            cipla:customFont="@string/raavi_bold" />
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_timeline_data_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_timeline"
+            android:layout_marginTop="@dimen/textSubListChild_margin_Top"
+            android:text=" "
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubListChild"
+            cipla:customFont="@string/raavi_regular"/>
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_prop_duration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_timeline_data_view"
+            android:layout_marginTop="@dimen/textSubList_margin_Top"
+            android:text="@string/prop_duration"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubList"
+            android:textStyle="bold"
+            cipla:customFont="@string/raavi_bold" />
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_prop_duration_data_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_prop_duration"
+            android:layout_marginTop="@dimen/textSubListChild_margin_Top"
+            android:text=" "
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubListChild"
+            cipla:customFont="@string/raavi_regular"/>
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_fund_req"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_prop_duration_data_view"
+            android:layout_marginTop="@dimen/textSubList_margin_Top"
+            android:text="@string/fund_req"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubList"
+            android:textStyle="bold"
+            cipla:customFont="@string/raavi_bold" />
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_fund_req_data_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_fund_req"
+            android:layout_marginTop="@dimen/textSubListChild_margin_Top"
+            android:text=" "
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubListChild"
+            cipla:customFont="@string/raavi_regular"/>
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_district"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_fund_req_data_view"
+            android:layout_marginTop="@dimen/textSubList_margin_Top"
+            android:text="@string/district"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubList"
+            android:textStyle="bold"
+            cipla:customFont="@string/raavi_bold" />
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_district_data_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_district"
+            android:layout_marginTop="@dimen/textSubListChild_margin_Top"
+            android:text=" "
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubListChild"
+            cipla:customFont="@string/raavi_regular"/>
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_block"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_district_data_view"
+            android:layout_marginTop="@dimen/textSubList_margin_Top"
+            android:text="@string/block"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubList"
+            android:textStyle="bold"
+            cipla:customFont="@string/raavi_bold" />
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_block_data_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_block"
+            android:layout_marginTop="@dimen/textSubListChild_margin_Top"
+            android:text=" "
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubListChild"
+            cipla:customFont="@string/raavi_regular"/>
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_vill"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_block_data_view"
+            android:layout_marginTop="@dimen/textSubList_margin_Top"
+            android:text="@string/vill"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubList"
+            android:textStyle="bold"
+            cipla:customFont="@string/raavi_bold" />
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_vill_data_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_vill"
+            android:layout_marginTop="@dimen/textSubListChild_margin_Top"
+            android:text=" "
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubListChild"
+            cipla:customFont="@string/raavi_regular"/>
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_loc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_vill_data_view"
+            android:layout_marginTop="@dimen/textSubList_margin_Top"
+            android:text="@string/loc"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubList"
+            android:textStyle="bold"
+            cipla:customFont="@string/raavi_bold" />
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_loc_data_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_loc"
+            android:layout_marginTop="@dimen/textSubListChild_margin_Top"
+            android:text=" "
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubListChild"
+            cipla:customFont="@string/raavi_regular"/>
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_distance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_loc_data_view"
+            android:layout_marginTop="@dimen/textSubList_margin_Top"
+            android:text="@string/distance"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubList"
+            android:textStyle="bold"
+            cipla:customFont="@string/raavi_bold" />
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_distance_data_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_distance"
+            android:layout_marginTop="@dimen/textSubListChild_margin_Top"
+            android:text=" "
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubListChild"
+            cipla:customFont="@string/raavi_regular"/>
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_benificiary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_distance_data_view"
+            android:layout_marginTop="@dimen/textSubList_margin_Top"
+            android:text="@string/benificiary"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubList"
+            android:textStyle="bold"
+            cipla:customFont="@string/raavi_bold" />
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_benificiary_data_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_benificiary"
+            android:layout_marginTop="@dimen/textSubListChild_margin_Top"
+            android:text=" "
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubListChild"
+            cipla:customFont="@string/raavi_regular"/>
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_rationale"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_benificiary_data_view"
+            android:layout_marginTop="@dimen/textSubList_margin_Top"
+            android:text="@string/rationale"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubList"
+            android:textStyle="bold"
+            cipla:customFont="@string/raavi_bold" />
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_rationale_data_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_rationale"
+            android:layout_marginTop="@dimen/textSubListChild_margin_Top"
+            android:layout_marginBottom="5dp"
+            android:text=" "
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubListChild"
+            cipla:customFont="@string/raavi_regular"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
+
+    </ScrollView>

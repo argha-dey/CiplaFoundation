@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+
+    <ImageView
+        android:id="@+id/iv_marker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="center"
+        android:src="@drawable/marker_blue" />
+
+    <TextView
+        android:id="@+id/tv_divisionName"
+        android:layout_below="@+id/iv_marker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="2dp"
+        android:padding="4dp"
+        android:gravity="center"
+        android:text="Division"
+        android:textColor="@color/login_btn_unclicked"
+        android:background="@drawable/marker_border_box"
+        android:textSize="10sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

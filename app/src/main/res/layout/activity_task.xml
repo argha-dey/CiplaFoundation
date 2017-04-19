@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ripple="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/top_header"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/login"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp">
+
+        <com.andexert.library.RippleView
+            android:id="@+id/rv_proposal"
+            rv_centered="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            ripple:rv_type="rectangle"
+            ripple:rv_rippleDuration="500">
+
+            <Button
+                android:id="@+id/btn_proposal"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/proposal"
+                android:text="@string/proposal"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceMedium"/>
+        </com.andexert.library.RippleView>
+
+
+        <com.andexert.library.RippleView
+            android:id="@+id/rv_project"
+            rv_centered="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rv_proposal"
+            android:layout_marginTop="15dp"
+            ripple:rv_type="rectangle"
+            ripple:rv_rippleDuration="500">
+
+            <Button
+                android:id="@+id/btn_project"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/project"
+                android:text="@string/project"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </com.andexert.library.RippleView>
+
+
+        <com.andexert.library.RippleView
+            android:id="@+id/rv_event"
+            rv_centered="true"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/rv_project"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            ripple:rv_type="rectangle"
+            ripple:rv_rippleDuration="500">
+
+            <Button
+                android:id="@+id/btn_event"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/event"
+                android:text="@string/event"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        </com.andexert.library.RippleView>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

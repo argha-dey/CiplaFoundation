@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:ripple="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+
+    <com.ciplafoundation.adapter.SlideHolder
+        android:id="@+id/ll_slide"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="1dp"
+        android:layout_above="@+id/ll_pending_approved"
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+
+        <LinearLayout
+
+            android:id="@+id/ll_drawer_layout"
+            android:layout_width="280dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+
+            android:elevation="20dp"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+           <include layout="@layout/left_menu_slider"/>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/rl_headerTree"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_alignParentTop="true"
+                android:layout_alignStart="@+id/ll_main_container"
+
+                android:background="#3c3c3c"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/menu_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/menu_icon" />
+
+                <TextView
+
+                    android:id="@+id/textView"
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="1dp"
+                    android:layout_toEndOf="@+id/menu_icon"
+                    android:text="LEVEL TREE"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+
+            <!--<RelativeLayout
+                android:id="@+id/rl_headerTextview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_headerTree"
+                android:background="@drawable/bg">-->
+
+            <TextView
+                android:id="@+id/tv_heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/rl_headerTree"
+                android:layout_centerHorizontal="true"
+                android:layout_margin="15dp"
+                android:gravity="center"
+                android:text=" "
+                android:textColor="@color/login_btn_unclicked"
+                android:textSize="@dimen/textheading" />
+
+            <!-- </RelativeLayout>-->
+
+
+            <LinearLayout
+                android:id="@+id/ll_main_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/tv_heading"
+                android:background="@drawable/bg"
+                android:orientation="vertical">
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+
+    </com.ciplafoundation.adapter.SlideHolder>
+
+    <LinearLayout
+        android:id="@+id/ll_pending_approved"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:weightSum="2">
+
+        <com.andexert.library.RippleView
+            android:id="@+id/rv_proposal"
+            rv_centered="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            ripple:rv_type="rectangle">
+
+            <Button
+                android:id="@+id/btn_pending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/pending"
+                android:elevation="10dp"
+                android:text="PENDING"
+                android:textColor="#fff"
+                android:textSize="20sp" />
+
+        </com.andexert.library.RippleView>
+
+        <View
+            android:layout_width="2dp"
+            android:layout_height="match_parent"
+
+            />
+
+        <com.andexert.library.RippleView
+            rv_centered="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            ripple:rv_type="rectangle">
+
+            <Button
+                android:id="@+id/btn_approved"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/approved"
+                android:elevation="10dp"
+                android:text="APPROVED"
+                android:textColor="#fff"
+                android:textSize="20sp" />
+        </com.andexert.library.RippleView>
+    </LinearLayout>
+</RelativeLayout>
