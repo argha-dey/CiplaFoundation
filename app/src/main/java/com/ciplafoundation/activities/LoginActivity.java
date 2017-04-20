@@ -8,13 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
-//import android.widget.CheckBox;
-import com.rey.material.widget.CheckBox;
-
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,12 +22,15 @@ import com.ciplafoundation.model.UserRoleClass;
 import com.ciplafoundation.services.VolleyTaskManager;
 import com.ciplafoundation.utility.ServerResponseCallback;
 import com.ciplafoundation.utility.Util;
-
+import com.rey.material.widget.CheckBox;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+
+//import android.widget.CheckBox;
 
 /**
  * Created by User-66-pc on 3/21/2017.
@@ -42,6 +40,7 @@ public class LoginActivity extends AppCompatActivity implements
         ServerResponseCallback
         //,DropDownClickListener
         //test
+    //Argha
 {
 
     EditText et_username,et_password;

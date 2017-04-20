@@ -49,9 +49,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by User-66-pc on 3/28/2017.
- */
+
 
 public class FragmentBaseActivity extends BaseActivity implements View.OnClickListener,ServerResponseCallback {
 
