@@ -38,9 +38,7 @@ import java.util.HashMap;
 
 public class LoginActivity extends AppCompatActivity implements
         ServerResponseCallback
-        //,DropDownClickListener
-        //test now
-    //Argha dey hi
+
 {
 
     EditText et_username,et_password;
