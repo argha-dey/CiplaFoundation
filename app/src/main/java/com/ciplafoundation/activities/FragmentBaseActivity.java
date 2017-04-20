@@ -99,6 +99,7 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
         ll_pending_approved = (LinearLayout) findViewById(R.id.ll_pending_approved);
         tv_heading = (TextView) findViewById(R.id.tv_heading);
         btn_pending = (Button) findViewById(R.id.btn_pending);
+        list_slidermenu = (ListView)findViewById(R.id.lv_slidermenu);
         btn_pending.setOnClickListener(this);
         btn_approved = (Button) findViewById(R.id.btn_approved);
         btn_approved.setOnClickListener(this);
@@ -238,7 +239,7 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
 
                 @Override
                 public View getView(NLevelItem item) {
-                    View view = inflater.inflate(android.R.layout.simple_list_item_1, null);
+                    View view = inflater.inflate(R.layout.n_level_list_item, null);
                     RadioButton rb_plusMinus = (RadioButton) view.findViewById(R.id.rb_plusMinus);
                     LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
                     llp.setMargins(marginLeft, marginTop, 0, marginBottom);
@@ -443,6 +444,7 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
                 treeList.add(treeData);
 
             }
+            navigationDrawer(); // Populating drawer list values
 
 
         }
@@ -529,7 +531,7 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
         Log.v("treeList", treeList.size() + "");*/
 
         nLevelList = new ArrayList<NLevelItem>();
-     //   addingTree(null, treeList, 5, 15, 15, Typeface.BOLD, "#333333");
+        addingTree(null, treeList, 5, 15, 15, Typeface.BOLD, "#333333");
 
         nLevelAdapter = new NLevelAdapter(nLevelList);
         list_slidermenu.setAdapter(nLevelAdapter);
@@ -543,8 +545,6 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
                 Log.v("view id:", view.getTag().toString());
                 Log.v("nLevelAdapterCount()", nLevelAdapter.getCount() + "");
 
-              //  Util util = new Util(ActivityDataListActivity.this);
-
                 if (Util.isConnectionPossible()) {
                     System.out.println("Connected");
 
@@ -553,25 +553,20 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
                     ((NLevelAdapter) list_slidermenu.getAdapter()).getFilter()
                             .filter();
 
-                    //selectedItem(view.getTag().toString());
+                    selectedItem(view.getTag().toString());
 
                 } else {
                     Util.showErrorDialog(FragmentBaseActivity.this,
                             "Connection is not possible. Please check your internet connectivity..!");
                 }
-
             }
         });
-
-        // enabling action bar app icon and behaving it as toggle button
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-        getActionBar().setHomeButtonEnabled(true);
     }
 
 
 
 
-/*
+
     protected void selectedItem(String levelID) {
         for (int i = 0; i < nLevelList.size(); i++) {
             if (nLevelList.get(i).getTreeDataModel().getLevelId()
@@ -586,14 +581,14 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
 
         rlActivityDataListHeader.setVisibility(View.VISIBLE);
 
-        txt_dexcription.setText(selectedTreeDataModel.getLevelDesc());
-        getLevelListData(selectedTreeDataModel.getLevelId());
+        //txt_dexcription.setText(selectedTreeDataModel.getLevelDesc());
+        //getLevelListData(selectedTreeDataModel.getLevelId());
 
 
         Log.v("selectedTreeDataModel", selectedTreeDataModel.getLevelId());
         Log.v("selectedTreeDataModel", selectedTreeDataModel.getLevelDesc());
     }
-*/
+
 
 
 
