@@ -60,6 +60,7 @@ public class LoginActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         init();
+        //tested by Chiranjit
     }
 
     /*******
