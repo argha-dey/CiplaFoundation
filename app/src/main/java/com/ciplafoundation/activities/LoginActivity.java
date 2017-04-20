@@ -54,7 +54,6 @@ public class LoginActivity extends AppCompatActivity implements
     private ArrayList<UserRole> arrlistUserRole=new ArrayList<>();
     private UserClass user = new UserClass();
     private String userRoll_name="",userRole_id="";
-//Chiranjit
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
