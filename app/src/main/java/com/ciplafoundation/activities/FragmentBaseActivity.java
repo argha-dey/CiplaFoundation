@@ -111,8 +111,8 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
         fragmentPending = FragmentPending.newInstance(tv_heading, ll_pending_approved);
         if (Util.checkConnectivity(mContext)) {
             proposalListWebServiceCalling();
-            TreeListwebServiceCalling();
-            SearchTreeListwebServiceCalling();
+            /*TreeListwebServiceCalling();
+            SearchTreeListwebServiceCalling();*/
 
         } else
             //Util.showMessageWithOk(mContext,getString(R.string.no_internet));
@@ -295,6 +295,62 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
 
     @Override
     public void onSuccess(JSONObject resultJsonObject) {
+
+        if (isSearchTreeList) {
+            isSearchTreeList = false;
+
+            JSONArray searchJsonArray = resultJsonObject.optJSONArray("search_level_list");
+
+            Log.v("JSON Response:", resultJsonObject.toString());
+
+            for (int i = 0; i < searchJsonArray.length(); i++) {
+                TreeDataModel searchData = new TreeDataModel();
+                JSONObject searchJsonObject = searchJsonArray
+                        .optJSONObject(i);
+
+                searchData.setLevelId(searchJsonObject
+                        .optString("LVL_LEVEL_ID"));
+                searchData.setLevelDesc(searchJsonObject
+                        .optString("LVL_LEVEL_DESC"));
+
+                searchList.add(searchData);
+            }
+        }
+        if (isTreeList) {
+            isTreeList=false;
+            JSONArray eventJsonArray = resultJsonObject.optJSONArray("tree");
+            treeList.clear();
+            for (int i= 0; i < eventJsonArray.length(); i++) {
+
+                TreeDataModel treeData = new TreeDataModel();
+                JSONObject treeJsonObject = eventJsonArray
+                        .optJSONObject(i);
+
+                treeData.setLevelId(treeJsonObject.optString("level_id"));
+                treeData.setParentId(treeJsonObject.optString("parent_id"));
+                treeData.setLevelDesc(treeJsonObject.optString("level_desc"));
+                treeData.setParentLevel(treeJsonObject.optString("parent_level"));
+                treeData.setBreadCrumb(treeData.getLevelId() + ",");
+
+                if (treeJsonObject.has("child")) {
+                    //  JSONArray childTreeJsonArray = treeJsonObject.getJSONArray("child");
+                    JSONArray childTreeJsonArray = treeJsonObject.optJSONArray("child");
+                    ArrayList<TreeDataModel> childTreeDataList = new ArrayList<TreeDataModel>();
+                    childTreeDataList = recursivellyParse(childTreeJsonArray,treeData.getBreadCrumb());
+
+                    treeData.setChildDataEntity(childTreeDataList);
+
+                }
+
+                treeList.add(treeData);
+
+            }
+            SearchTreeListwebServiceCalling();
+            // navigationDrawer(); // Populating drawer list values
+
+
+        }
+
         if (isProposalList) {
             isProposalList = false;
             if (resultJsonObject.optBoolean("status") == true) {
@@ -359,6 +415,8 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
                 //Util.showMessageWithOk(mContext, "No Proposal List Found!!!");
                 initFragment();
             }
+            TreeListwebServiceCalling();
+
         }
 
         if (prefs.getIsProjectDetails()) {
@@ -409,62 +467,7 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
         Log.v("JSON Response:", resultJsonObject.toString());
         // Parsing data from the response object
 
-        if (isSearchTreeList) {
-            isSearchTreeList = false;
 
-            JSONArray searchJsonArray = resultJsonObject.optJSONArray("search_level_list");
-
-            Log.v("JSON Response:", resultJsonObject.toString());
-
-            for (int i = 0; i < searchJsonArray.length(); i++) {
-                TreeDataModel searchData = new TreeDataModel();
-                JSONObject searchJsonObject = searchJsonArray
-                        .optJSONObject(i);
-
-                searchData.setLevelId(searchJsonObject
-                        .optString("LVL_LEVEL_ID"));
-                searchData.setLevelDesc(searchJsonObject
-                        .optString("LVL_LEVEL_DESC"));
-
-                searchList.add(searchData);
-            }
-        }
-      else  if (isTreeList) {
-            isTreeList=false;
-
-
-
-            JSONArray eventJsonArray = resultJsonObject.optJSONArray("tree");
-            treeList.clear();
-            for (int i= 0; i < eventJsonArray.length(); i++) {
-
-                TreeDataModel treeData = new TreeDataModel();
-                JSONObject treeJsonObject = eventJsonArray
-                        .optJSONObject(i);
-
-                treeData.setLevelId(treeJsonObject.optString("level_id"));
-                treeData.setParentId(treeJsonObject.optString("parent_id"));
-                treeData.setLevelDesc(treeJsonObject.optString("level_desc"));
-                treeData.setParentLevel(treeJsonObject.optString("parent_level"));
-                treeData.setBreadCrumb(treeData.getLevelId() + ",");
-
-                if (treeJsonObject.has("child")) {
-                    //  JSONArray childTreeJsonArray = treeJsonObject.getJSONArray("child");
-                    JSONArray childTreeJsonArray = treeJsonObject.optJSONArray("child");
-                    ArrayList<TreeDataModel> childTreeDataList = new ArrayList<TreeDataModel>();
-                    childTreeDataList = recursivellyParse(childTreeJsonArray,treeData.getBreadCrumb());
-
-                    treeData.setChildDataEntity(childTreeDataList);
-
-                }
-
-                treeList.add(treeData);
-
-            }
-          // navigationDrawer(); // Populating drawer list values
-
-
-        }
     }
 
         private ArrayList<TreeDataModel> recursivellyParse (JSONArray childTreeJsonArray, String
