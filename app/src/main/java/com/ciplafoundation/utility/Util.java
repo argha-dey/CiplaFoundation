@@ -82,7 +82,7 @@ public class Util {
         }
     }
 
-    public  static boolean isConnectionPossible() {
+   /* public  static boolean isConnectionPossible() {
 
         ConnectivityManager connectivity = (ConnectivityManager) mContext
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -96,7 +96,7 @@ public class Util {
 
         }
         return false;
-    }
+    }*/
 
     public static boolean isEmailValid(String email) {
         Pattern pattern;

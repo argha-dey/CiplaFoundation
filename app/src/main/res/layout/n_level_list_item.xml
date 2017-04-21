@@ -12,6 +12,7 @@
         android:button="@drawable/plus_minus_chkbx_selector"
         android:focusable="false"
         android:clickable="false"
-        android:focusableInTouchMode="false" />
+        android:focusableInTouchMode="false"
+        android:textColor="@color/white"/>
 
 </LinearLayout>

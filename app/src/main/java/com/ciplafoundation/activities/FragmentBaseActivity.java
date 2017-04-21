@@ -74,7 +74,7 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
     private ArrayList<ProposalDetails> proposalDetailList = new ArrayList<>();
     private NLevelAdapter nLevelAdapter;
     private ArrayAdapter<String> arrayAdapter;
-    private ArrayList<NLevelItem> nLevelList=new ArrayList<>();
+    private ArrayList<NLevelItem> nLevelList;
     private SlideHolder mSliderHolder;
     private ProgressDialog pDialog;
 
@@ -144,7 +144,7 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
         String user_id = user.getUserId();
         String division_id = prefs.getDivisionId();
         String params = "USR_USER_ID=" + user_id + "&DIVISION_ID=" + division_id;
-        volleyTaskManager.doGetProposalList(params, false);
+        volleyTaskManager.doGetProposalList(params, true);
     }
 
     private void TreeListwebServiceCalling() {
@@ -154,7 +154,7 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
         String division_id = prefs.getDivisionId();
         //String params = "USR_USER_ID=" + user_id;// + "&DIVISION_ID=" + division_id;
         String params = "DIVISION_ID=" + division_id;
-        volleyTaskManager.doGetTreeList(params, false);
+        volleyTaskManager.doGetTreeList(params, true);
     }
 
     private void showProgressDialog() {
@@ -215,8 +215,8 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
                 replaceFragment(fragmentApproved);
                 break;
             case R.id.menu_icon:
-                addingTree(null, treeList, 5, 15, 15, Typeface.BOLD, "#333333");
-               // navigationDrawer();
+                //addingTree(null, treeList, 5, 15, 15, Typeface.BOLD, "#EBEBEC");
+                navigationDrawer();
                 mSliderHolder.toggle();
 
                 //mSliderHolder.toggleImmediately();
@@ -247,6 +247,7 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
                     rb_plusMinus.setTextColor(Color.parseColor(textColor));
                     rb_plusMinus.setTypeface(null, style);
                     rb_plusMinus.setText(item.getTreeDataModel().getLevelDesc());
+                    rb_plusMinus.setTextSize(18);
 
                     if (item.getTreeDataModel().getIsSearched()) {
                         rb_plusMinus.setBackgroundColor(Color.parseColor("#33B5E5"));
@@ -418,7 +419,7 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
 
 
             JSONArray eventJsonArray = resultJsonObject.optJSONArray("tree");
-
+            treeList.clear();
             for (int i= 0; i < eventJsonArray.length(); i++) {
 
                 TreeDataModel treeData = new TreeDataModel();
@@ -444,7 +445,7 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
                 treeList.add(treeData);
 
             }
-            navigationDrawer(); // Populating drawer list values
+          // navigationDrawer(); // Populating drawer list values
 
 
         }
@@ -531,7 +532,7 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
         Log.v("treeList", treeList.size() + "");*/
 
         nLevelList = new ArrayList<NLevelItem>();
-        addingTree(null, treeList, 5, 15, 15, Typeface.BOLD, "#333333");
+        addingTree(null, treeList, 5, 15, 15, Typeface.BOLD, "#EBEBEC");
 
         nLevelAdapter = new NLevelAdapter(nLevelList);
         list_slidermenu.setAdapter(nLevelAdapter);
@@ -545,7 +546,7 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
                 Log.v("view id:", view.getTag().toString());
                 Log.v("nLevelAdapterCount()", nLevelAdapter.getCount() + "");
 
-                if (Util.isConnectionPossible()) {
+                if (Util.checkConnectivity(mContext)) {
                     System.out.println("Connected");
 
                     ((NLevelAdapter) list_slidermenu.getAdapter())
@@ -579,7 +580,7 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
             }
         }
 
-        rlActivityDataListHeader.setVisibility(View.VISIBLE);
+        //rlActivityDataListHeader.setVisibility(View.VISIBLE);
 
         //txt_dexcription.setText(selectedTreeDataModel.getLevelDesc());
         //getLevelListData(selectedTreeDataModel.getLevelId());

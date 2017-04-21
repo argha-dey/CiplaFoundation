@@ -189,8 +189,8 @@ public class VolleyTaskManager extends ServiceConnector {
     }
 
     public void doGetProposalList(String params,boolean isToHideDialog) {
-        this.isToShowDialog = isToHideDialog;
-        //this.isToHideDialog = isToHideDialog;
+        //this.isToShowDialog = isToHideDialog;
+        this.isToHideDialog = isToHideDialog;
         String url = getBaseURL() + "proposal/lists/get?"+params;
         int method = Method.GET;
         Log.i("url", url);
@@ -207,8 +207,8 @@ public class VolleyTaskManager extends ServiceConnector {
         makeJsonObjReq(method, url, new HashMap<String, String>());
     }
     public void doGetTreeList(String params,boolean isToHideDialog) {
-        this.isToShowDialog = isToHideDialog;
-        //this.isToHideDialog = isToHideDialog;
+
+        this.isToHideDialog = isToHideDialog;
         String url = getBaseURL() + "tree/lists/get?"+params;
         int method = Method.GET;
         Log.i("url", url);
