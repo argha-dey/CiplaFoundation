@@ -215,5 +215,13 @@ public class VolleyTaskManager extends ServiceConnector {
         //System.out.println(paramsMap);
         makeJsonObjReq(method, url, new HashMap<String, String>());
     }
+    public void doGetSearchTreeList(String params,boolean isToHideDialog) {
 
+        this.isToHideDialog = isToHideDialog;
+        String url = getBaseURL() + "tree/searchlevellist/get?"+params;
+        int method = Method.GET;
+        Log.i("url", url);
+        //System.out.println(paramsMap);
+        makeJsonObjReq(method, url, new HashMap<String, String>());
+    }
 }

@@ -22,6 +22,7 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.ciplafoundation.R;
 import com.ciplafoundation.adapter.SlideHolder;
@@ -63,7 +64,7 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
     private FragmentPending fragmentPending = new FragmentPending();
     private FragmentApproved fragmentApproved = new FragmentApproved();
     private FragmentProposalDetails fragmentProposalDetails = new FragmentProposalDetails();
-    private boolean isProposalList = false, isProposalDetails = false, isTreeList = false;
+    private boolean isProposalList = false, isProposalDetails = false, isTreeList = false,isSearchTreeList=false;
     private Context mContext;
     private Prefs prefs;
     private ListView list_slidermenu;
@@ -111,6 +112,7 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
         if (Util.checkConnectivity(mContext)) {
             proposalListWebServiceCalling();
             TreeListwebServiceCalling();
+            SearchTreeListwebServiceCalling();
 
         } else
             //Util.showMessageWithOk(mContext,getString(R.string.no_internet));
@@ -155,6 +157,16 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
         //String params = "USR_USER_ID=" + user_id;// + "&DIVISION_ID=" + division_id;
         String params = "DIVISION_ID=" + division_id;
         volleyTaskManager.doGetTreeList(params, true);
+    }
+
+    private void SearchTreeListwebServiceCalling() {
+        isSearchTreeList = true;
+        //UserClass user = Util.fetchUserClass(mContext);
+        //  String user_id = user.getUserId();
+        String division_id = prefs.getDivisionId();
+        //String params = "USR_USER_ID=" + user_id;// + "&DIVISION_ID=" + division_id;
+        String params = "DIVISION_ID=" + division_id;
+        volleyTaskManager.doGetSearchTreeList(params, true);
     }
 
     private void showProgressDialog() {
@@ -397,9 +409,12 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
         Log.v("JSON Response:", resultJsonObject.toString());
         // Parsing data from the response object
 
+        if (isSearchTreeList) {
+            isSearchTreeList = false;
 
+            JSONArray searchJsonArray = resultJsonObject.optJSONArray("search_level_list");
 
-           /* JSONArray searchJsonArray = resultJsonObject.optJSONArray("search_level_list");
+            Log.v("JSON Response:", resultJsonObject.toString());
 
             for (int i = 0; i < searchJsonArray.length(); i++) {
                 TreeDataModel searchData = new TreeDataModel();
@@ -412,8 +427,9 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
                         .optString("LVL_LEVEL_DESC"));
 
                 searchList.add(searchData);
-            }*/
-        if (isTreeList) {
+            }
+        }
+      else  if (isTreeList) {
             isTreeList=false;
 
 
@@ -500,7 +516,7 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
 
 
   private void navigationDrawer() {
- /*       String searchArray[] = new String[searchList.size()];
+       String searchArray[] = new String[searchList.size()];
         for (int i = 0; i < searchList.size(); i++) {
             searchArray[i] = searchList.get(i).getLevelDesc();
         }
@@ -519,17 +535,17 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
 
                 Util util = new Util();
 
-                if (util.isConnectionPossible()) {
+                if (util.checkConnectivity(mContext)) {
                     System.out.println("Connected");
 
-                   // searchingItem(ac_categories.getText().toString());
+                    searchingItem(ac_categories.getText().toString());
 
                 }
 
             }
         });
 
-        Log.v("treeList", treeList.size() + "");*/
+        Log.v("treeList", treeList.size() + "");
 
         nLevelList = new ArrayList<NLevelItem>();
         addingTree(null, treeList, 5, 15, 15, Typeface.BOLD, "#EBEBEC");
@@ -594,7 +610,7 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
 
 
 
-/*
+
     protected void searchingItem(String searchString) {
         closingAllNodes();
         boolean searchFound = false;
@@ -625,19 +641,19 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
                 openingTree(parts[i]);
             }
 
-            rlActivityDataListHeader.setVisibility(View.VISIBLE);
+         /*   rlActivityDataListHeader.setVisibility(View.VISIBLE);
 
             txt_dexcription.setText(selectedTreeDataModel.getLevelDesc());
 
             getLevelListData(selectedTreeDataModel.getLevelId());
-
+*/
 
 
         } else {
             Toast.makeText(FragmentBaseActivity.this,
                     "No search result found!", Toast.LENGTH_LONG).show();
         }
-    }*/
+    }
 
     private void openingTree(String eachNode) {
 
