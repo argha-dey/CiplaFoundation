@@ -8,8 +8,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+//import android.widget.CheckBox;
+import com.rey.material.widget.CheckBox;
+
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,23 +27,17 @@ import com.ciplafoundation.model.UserRoleClass;
 import com.ciplafoundation.services.VolleyTaskManager;
 import com.ciplafoundation.utility.ServerResponseCallback;
 import com.ciplafoundation.utility.Util;
-import com.rey.material.widget.CheckBox;
+
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
-//import android.widget.CheckBox;
-
-/**
- * Created by User-66-pc on 3/21/2017.
- */
 
 public class LoginActivity extends AppCompatActivity implements
         ServerResponseCallback
-
+        //,DropDownClickListener
 {
 
     EditText et_username,et_password;
@@ -55,12 +54,12 @@ public class LoginActivity extends AppCompatActivity implements
     private UserClass user = new UserClass();
     private String userRoll_name="",userRole_id="";
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         init();
-        //tested by Chiranjit
     }
 
     /*******
@@ -141,7 +140,7 @@ public class LoginActivity extends AppCompatActivity implements
         });
 
 
-       dropdown_userRole.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        dropdown_userRole.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -304,8 +303,11 @@ public class LoginActivity extends AppCompatActivity implements
                 corridorArray[i] = arrlistUserRole.get(i).getRole_name();
             }
             dropdown_userRole.setItems(corridorArray);
-            if(corridorArray.length==1)
+            if(corridorArray.length==1) {
                 dropdown_userRole.setText(corridorArray[0].toString());
+                dropdown_userRole.setTag(corridorArray[0].toString());
+                userRole_id=arrlistUserRole.get(0).getRole_id();
+            }
             else
                 dropdown_userRole.setText("Select");
             dropdown_userRole.setTag("");
@@ -323,13 +325,13 @@ public class LoginActivity extends AppCompatActivity implements
 
     /*********************GOTO Home ************************/
     private void openMapActivity() {
-       Intent intent = new Intent(LoginActivity.this, MapActivity.class);
+        Intent intent = new Intent(LoginActivity.this, MapActivity.class);
         startActivity(intent);
         finish();
     }
 
     protected void setDropDownSelectListener(DropDownClickListener DropDownClickListener) {
-       // this.DropDownClickListener = DropDownClickListener;
+        // this.DropDownClickListener = DropDownClickListener;
     }
 
 }
