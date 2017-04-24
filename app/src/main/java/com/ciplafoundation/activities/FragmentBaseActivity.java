@@ -111,8 +111,6 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
         fragmentPending = FragmentPending.newInstance(tv_heading, ll_pending_approved);
         if (Util.checkConnectivity(mContext)) {
             proposalListWebServiceCalling();
-            /*TreeListwebServiceCalling();
-            SearchTreeListwebServiceCalling();*/
 
         } else
             //Util.showMessageWithOk(mContext,getString(R.string.no_internet));
@@ -151,20 +149,14 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
 
     private void TreeListwebServiceCalling() {
         isTreeList = true;
-        //UserClass user = Util.fetchUserClass(mContext);
-        //  String user_id = user.getUserId();
         String division_id = prefs.getDivisionId();
-        //String params = "USR_USER_ID=" + user_id;// + "&DIVISION_ID=" + division_id;
         String params = "DIVISION_ID=" + division_id;
         volleyTaskManager.doGetTreeList(params, true);
     }
 
     private void SearchTreeListwebServiceCalling() {
         isSearchTreeList = true;
-        //UserClass user = Util.fetchUserClass(mContext);
-        //  String user_id = user.getUserId();
         String division_id = prefs.getDivisionId();
-        //String params = "USR_USER_ID=" + user_id;// + "&DIVISION_ID=" + division_id;
         String params = "DIVISION_ID=" + division_id;
         volleyTaskManager.doGetSearchTreeList(params, true);
     }
@@ -227,11 +219,8 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
                 replaceFragment(fragmentApproved);
                 break;
             case R.id.menu_icon:
-                //addingTree(null, treeList, 5, 15, 15, Typeface.BOLD, "#EBEBEC");
                 navigationDrawer();
                 mSliderHolder.toggle();
-
-                //mSliderHolder.toggleImmediately();
                 break;
 
             default:
@@ -242,7 +231,7 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
     private void addingTree(NLevelItem nLevelItem,
                             final ArrayList<TreeDataModel> treeDataModel, final int marginLeft,
                             final int marginTop, final int marginBottom, final int style,
-                            final String textColor) {
+                            final String textColor, final int textSize) {
         final LayoutInflater inflater = LayoutInflater.from(this);
 
         for (int i = 0; i < treeDataModel.size(); i++) {
@@ -259,13 +248,15 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
                     rb_plusMinus.setTextColor(Color.parseColor(textColor));
                     rb_plusMinus.setTypeface(null, style);
                     rb_plusMinus.setText(item.getTreeDataModel().getLevelDesc());
-                    rb_plusMinus.setTextSize(18);
+                    rb_plusMinus.setTextSize(textSize);
 
                     if (item.getTreeDataModel().getIsSearched()) {
-                        rb_plusMinus.setBackgroundColor(Color.parseColor("#33B5E5"));
-                    } else if (item.getTreeDataModel().getIsClicked()) {
-                        rb_plusMinus.setBackgroundColor(Color.parseColor("#EBEBEC"));
-                    } else {
+                        //rb_plusMinus.setBackgroundColor(Color.parseColor("#33B5E5"));
+                        rb_plusMinus.setTextColor(Color.parseColor("#33B5E5"));
+                    } /*else if (item.getTreeDataModel().getIsClicked()) {
+                        //rb_plusMinus.setBackgroundColor(Color.parseColor("#EBEBEC"));
+                        rb_plusMinus.setTextColor(Color.parseColor("#EBEBEC"));
+                    } */else {
                         rb_plusMinus
                                 .setBackgroundColor(Color.TRANSPARENT);
                     }
@@ -286,9 +277,12 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
            nLevelList.add(parent);
             if (treeDataModel.get(i).getChildDataEntity().size() > 0) {
                 addingTree(parent, treeDataModel.get(i).getChildDataEntity(),
-                        (marginLeft + 37), 0, 0, Typeface.NORMAL, "#666666");
+                        (marginLeft + 37), 0, 0, Typeface.NORMAL, "#FFFFFF",15);
+                list_slidermenu.setDivider(null);
+                list_slidermenu.setDividerHeight(0);
             } else {
-
+                list_slidermenu.setDivider(getResources().getDrawable(R.color.white));
+                list_slidermenu.setDividerHeight(1);
             }
         }
     }
@@ -333,7 +327,6 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
                 treeData.setBreadCrumb(treeData.getLevelId() + ",");
 
                 if (treeJsonObject.has("child")) {
-                    //  JSONArray childTreeJsonArray = treeJsonObject.getJSONArray("child");
                     JSONArray childTreeJsonArray = treeJsonObject.optJSONArray("child");
                     ArrayList<TreeDataModel> childTreeDataList = new ArrayList<TreeDataModel>();
                     childTreeDataList = recursivellyParse(childTreeJsonArray,treeData.getBreadCrumb());
@@ -458,16 +451,7 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
 
         }
 
-        /*------------------------------*/
-
-
-        // As server responded successfully, dismissing the
-        // progress dialog
-        // pDialog.dismiss();
         Log.v("JSON Response:", resultJsonObject.toString());
-        // Parsing data from the response object
-
-
     }
 
         private ArrayList<TreeDataModel> recursivellyParse (JSONArray childTreeJsonArray, String
@@ -535,23 +519,17 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
                 Log.v("OnDismissListener", "OnDismissListener is called");
                 Util.hideSoftKeyboard(FragmentBaseActivity.this,
                         ac_categories);
-
                 Util util = new Util();
 
                 if (util.checkConnectivity(mContext)) {
                     System.out.println("Connected");
-
                     searchingItem(ac_categories.getText().toString());
-
                 }
-
             }
         });
-
         Log.v("treeList", treeList.size() + "");
-
         nLevelList = new ArrayList<NLevelItem>();
-        addingTree(null, treeList, 5, 15, 15, Typeface.BOLD, "#EBEBEC");
+        addingTree(null, treeList, 5, 15, 15, Typeface.BOLD, "#ffffff",17);
 
         nLevelAdapter = new NLevelAdapter(nLevelList);
         list_slidermenu.setAdapter(nLevelAdapter);
@@ -583,10 +561,6 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
         });
     }
 
-
-
-
-
     protected void selectedItem(String levelID) {
         for (int i = 0; i < nLevelList.size(); i++) {
             if (nLevelList.get(i).getTreeDataModel().getLevelId()
@@ -599,20 +573,9 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
             }
         }
 
-        //rlActivityDataListHeader.setVisibility(View.VISIBLE);
-
-        //txt_dexcription.setText(selectedTreeDataModel.getLevelDesc());
-        //getLevelListData(selectedTreeDataModel.getLevelId());
-
-
         Log.v("selectedTreeDataModel", selectedTreeDataModel.getLevelId());
         Log.v("selectedTreeDataModel", selectedTreeDataModel.getLevelDesc());
     }
-
-
-
-
-
 
     protected void searchingItem(String searchString) {
         closingAllNodes();
@@ -643,14 +606,6 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
             for (int i = 0; i < parts.length; i++) {
                 openingTree(parts[i]);
             }
-
-         /*   rlActivityDataListHeader.setVisibility(View.VISIBLE);
-
-            txt_dexcription.setText(selectedTreeDataModel.getLevelDesc());
-
-            getLevelListData(selectedTreeDataModel.getLevelId());
-*/
-
 
         } else {
             Toast.makeText(FragmentBaseActivity.this,
@@ -689,25 +644,17 @@ public class FragmentBaseActivity extends BaseActivity implements View.OnClickLi
                 }
                 nLevelAdapter
                         .setFiltered((ArrayList<NLevelListItem>) tempfiltered);
-
                 nLevelAdapter.notifyDataSetChanged();
-
                 Log.e("From Adapter.getCount()", nLevelAdapter.getCount() + "");
-
                 break;
             }
         }
 
     }
 
-
     private void closingAllNodes() {
         for (int i = 0; i < nLevelAdapter.getCount(); i++) {
             nLevelAdapter.collapseNode(i);
         }
     }
-
-
-
-
     }

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="start"
-    android:background="#838383"
+    android:background="#3c3c3c"
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -31,7 +31,7 @@
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/iv_searchIcon"
             android:clickable="true"
-            android:background="#58b0c6"
+            android:background="@color/search_background"
             android:gravity="center_vertical"
             android:completionThreshold="2"
             android:singleLine="true"
@@ -46,11 +46,12 @@
     <ListView
         android:elevation="5dp"
         android:id="@+id/lv_slidermenu"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:choiceMode="singleChoice"
         android:layout_marginLeft="@dimen/margin_ten"
-        android:divider="@null"
+        android:divider="#ffffff"
+        android:dividerHeight="1px"
         android:listSelector="@drawable/list_selector" />
 
 </LinearLayout>

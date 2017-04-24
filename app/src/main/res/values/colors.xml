@@ -19,6 +19,7 @@
     <color name="header_underline">#1ec3d2</color>
     <color name="divider_first">#34abbf</color>
     <color name="divider_second">#6acee0</color>
+    <color name="search_background">#58b0c6</color>
     <color name="headColor">#3c3c3c</color>
     <color name="listColor">#e4e4e4</color>
     <color name="pending">#f89406</color>
