@@ -10,12 +10,11 @@ import android.view.ViewGroup;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
 import com.ciplafoundation.R;
-import com.ciplafoundation.activities.FragmentBaseActivity;
 import com.ciplafoundation.activities.TaskActivity;
 import com.ciplafoundation.model.UserDivision;
 import com.ciplafoundation.utility.Prefs;
-import com.ciplafoundation.utility.Util;
 
 import java.util.ArrayList;
 
@@ -75,11 +74,12 @@ public class AdapterDivisionList extends RecyclerView.Adapter<AdapterDivisionLis
 
             rl_divisionList.setBackgroundResource(R.color.header_bg);
             popupWindow.dismiss();
+            Activity activity = (Activity) mContext;
             String division_id=arrUserDivision.get(getAdapterPosition()).getDivisionId();
             prefs = new Prefs(mContext);
             prefs.setDivisionId(division_id);
             Intent i=new Intent(mContext, TaskActivity.class);
-            Activity activity = (Activity) mContext;
+            i.putExtra("DivisionId",division_id);
             mContext.startActivity(i);
             activity.overridePendingTransition(R.anim.activity_right_in, R.anim.activity_right_out);
 

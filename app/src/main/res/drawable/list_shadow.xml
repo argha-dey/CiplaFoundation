@@ -4,6 +4,6 @@
 
     <item android:drawable="@drawable/list_header_shadow"/>
 
-    <item android:drawable="@drawable/list_button" android:bottom="2px"/>
+    <item android:drawable="@drawable/list_button" android:bottom="0px"/>
 
 </layer-list>

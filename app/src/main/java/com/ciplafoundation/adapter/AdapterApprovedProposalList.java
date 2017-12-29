@@ -1,7 +1,5 @@
 package com.ciplafoundation.adapter;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
@@ -10,22 +8,19 @@ import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AnimationUtils;
-import android.view.animation.TranslateAnimation;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ciplafoundation.R;
+import com.ciplafoundation.activities.FragmentBaseActivity;
 import com.ciplafoundation.model.AcceptedProposal;
 import com.ciplafoundation.model.AccordianClass;
 import com.ciplafoundation.model.UserClass;
 import com.ciplafoundation.services.VolleyTaskManager;
 import com.ciplafoundation.utility.Prefs;
 import com.ciplafoundation.utility.Util;
-
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -38,10 +33,11 @@ public class AdapterApprovedProposalList extends RecyclerView.Adapter<AdapterApp
     private UserClass user=new UserClass();
     private VolleyTaskManager volleyTaskManager;
     private Prefs prefs;
-
-    public AdapterApprovedProposalList(Context _mContext) {
+    private RecyclerView rcl;
+    public AdapterApprovedProposalList(Context _mContext,RecyclerView rcv) {
         this.mContext = _mContext;
         volleyTaskManager=new VolleyTaskManager(_mContext);
+        this.rcl=rcv;
     }
 
     @Override
@@ -63,7 +59,7 @@ public class AdapterApprovedProposalList extends RecyclerView.Adapter<AdapterApp
         holder.rl_header.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                rcl.smoothScrollToPosition(position);
                 if(approvedProposalList.get(position).getisExpanded())
                 {
                     approvedProposalList.get(position).setisExpanded(false);
@@ -99,9 +95,9 @@ public class AdapterApprovedProposalList extends RecyclerView.Adapter<AdapterApp
 
                 } else {*/
                     //Toast.makeText(mContext,""+holder.rl_child.getId(),Toast.LENGTH_SHORT).show();
-                   // holder.rl_child.setAnimation(AnimationUtils.loadAnimation(mContext,R.anim.slide_down));
-                   // holder.iv_arrow_approved.setBackgroundResource(R.drawable.accrodian_dropdown);
-                   // holder.rl_child.setVisibility(View.VISIBLE);
+                    // holder.rl_child.setAnimation(AnimationUtils.loadAnimation(mContext,R.anim.slide_down));
+                    // holder.iv_arrow_approved.setBackgroundResource(R.drawable.accrodian_dropdown);
+                    // holder.rl_child.setVisibility(View.VISIBLE);
 
                     SpannableStringBuilder builder_timeline = new SpannableStringBuilder();
                     String timeline=approvedProposalList.get(position).getTime_line_date();
@@ -118,8 +114,8 @@ public class AdapterApprovedProposalList extends RecyclerView.Adapter<AdapterApp
                     /*holder.tv_budget_data_view.setText(
                             NumberFormat.getNumberInstance(Locale.US).format(Double.parseDouble(pendingProposalList.get(position).getBudget())));*/
                     if(!approvedProposalList.get(position).getBudget().isEmpty())
-                    holder.tv_budget_data_view.setText(
-                            new DecimalFormat("##,##,##0").format(Integer.parseInt(approvedProposalList.get(position).getBudget())));
+                        holder.tv_budget_data_view.setText(
+                                new DecimalFormat("##,##,##0").format(Integer.parseInt(approvedProposalList.get(position).getBudget())));
 
                     SpannableStringBuilder builder_createdBy = new SpannableStringBuilder();
                     String CreatedBy="By "+approvedProposalList.get(position).getCreated_by()+" on " ;
@@ -166,14 +162,27 @@ public class AdapterApprovedProposalList extends RecyclerView.Adapter<AdapterApp
 
                 if(Util.checkConnectivity(mContext))
                 {
+                    prefs=new Prefs(mContext);
                     user=Util.fetchUserClass(mContext);
                     String id=approvedProposalList.get(position).getId();
                     String user_id=user.getUserId();
-                    String params="USR_USER_ID="+user_id+"&ID="+id;
-                    prefs=new Prefs(mContext);
-                    prefs.setIsProjectDetails(true);
+                    String role_id=user.getRoleId();
+                   // String params="USR_USER_ID="+user_id+"&ID="+id;
+                    String division_id = prefs.getDivisionId();
+                   // String params="USR_USER_ID="+user_id+"&ID="+id+"&DIVISION_ID="+division_id;
+                    String paramsMaps="USR_USER_ID="+user_id+"&ID="+id+"&DIVISION_ID="+division_id+"&ROLE_ID="+role_id;
+
                     //isProposalDetails=true;
-                    volleyTaskManager.doGetProposalDetails(params,true);
+                    if(FragmentBaseActivity.task!=null && FragmentBaseActivity.task.equalsIgnoreCase("project")) {
+                        String params="USR_USER_ID="+user_id+"&ID="+id+"&DIVISION_ID="+division_id;
+                        volleyTaskManager.doGetProjectDetails(params, true);
+                        prefs.setIsProjectDetails(true);
+                    }
+                    else {
+
+                        volleyTaskManager.doGetProposalDetails(paramsMaps, true);
+                        prefs.setIsProposalDetails(true);
+                    }
                 }
                 else
                     Util.showMessageWithOk(mContext,mContext.getString(R.string.no_internet));
@@ -211,13 +220,13 @@ public class AdapterApprovedProposalList extends RecyclerView.Adapter<AdapterApp
         }
     }
 
-        public void AddArray(ArrayList<AcceptedProposal> _arrDataFormListItems) {
-            approvedProposalList.clear();
-            if (_arrDataFormListItems != null
-                    && _arrDataFormListItems.size() > 0) {
-                approvedProposalList.addAll(_arrDataFormListItems);
-            }
-            notifyDataSetChanged();
-
+    public void AddArray(ArrayList<AcceptedProposal> _arrDataFormListItems) {
+        approvedProposalList.clear();
+        if (_arrDataFormListItems != null
+                && _arrDataFormListItems.size() > 0) {
+            approvedProposalList.addAll(_arrDataFormListItems);
         }
+        notifyDataSetChanged();
+
+    }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:cipla="http://schemas.android.com/tools"
     xmlns:ripple="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,8 +11,8 @@
         android:id="@+id/ll_slide"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:elevation="1dp"
         android:layout_above="@+id/ll_pending_approved"
+        android:elevation="1dp"
         android:orientation="horizontal"
         android:weightSum="3">
 
@@ -22,13 +23,12 @@
             android:layout_width="280dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-
-            android:elevation="20dp"
             android:animateLayoutChanges="true"
+            android:elevation="20dp"
             android:orientation="vertical"
             android:visibility="gone">
 
-           <include layout="@layout/left_menu_slider"/>
+            <include layout="@layout/left_menu_slider" />
 
 
         </LinearLayout>
@@ -57,7 +57,6 @@
                     android:background="@drawable/menu_icon" />
 
                 <TextView
-
                     android:id="@+id/textView"
                     android:layout_width="250dp"
                     android:layout_height="wrap_content"
@@ -67,7 +66,217 @@
                     android:text="LEVEL TREE"
                     android:textColor="#ffffff"
                     android:textSize="15sp" />
+
+
+                <ImageButton
+                    android:id="@+id/iv_refresh_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/refresh"
+                    android:padding="10dp" />
+
+                <ImageButton
+                    android:id="@+id/iv_search_icon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="15dp"
+                    android:layout_toLeftOf="@+id/iv_refresh_icon"
+                    android:background="@drawable/seatchoption"
+                    android:padding="10dp" />
+
+                <!--      <TextView
+                          android:id="@+id/search_text"
+                          android:layout_width="wrap_content"
+                          android:layout_height="wrap_content"
+                          android:layout_centerVertical="true"
+                          android:layout_marginRight="15dp"
+                          android:layout_toLeftOf="@+id/iv_refresh_icon"
+                          android:text="Search"
+                          android:textColor="#ffffff"
+                          android:textSize="15sp" />-->
+
             </RelativeLayout>
+
+
+            <LinearLayout
+                android:id="@+id/ll_search_initiated_by"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp">
+
+                    <TextView
+                        android:id="@+id/tv_initiated_by"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Initiated By"
+                        android:textColor="#000"
+                        android:textSize="13sp" />
+
+                    <RelativeLayout
+                        android:id="@+id/rl_search_option"
+                        android:layout_width="match_parent"
+                        android:layout_height="35dp"
+                        android:background="@drawable/black_border">
+
+                        <com.ciplafoundation.dropdown.DropDownViewForXML
+                            android:id="@+id/dropDown_search_option"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:background="@android:color/transparent"
+                            android:clickable="true"
+                            android:gravity="center_vertical"
+                            android:maxLines="1"
+                            android:hint="Select"
+                            android:paddingLeft="5dp"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/black"
+                            android:textColorHint="@color/black"
+                            android:textSize="15sp"
+                           />
+
+                        <ImageView
+                            android:layout_width="31.5dp"
+                            android:layout_height="31.5dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_margin="2dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/accrodian_dropdown"
+                            android:visibility="visible" />
+                    </RelativeLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:orientation="horizontal"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    android:weightSum="5">
+
+                    <LinearLayout
+                        android:id="@+id/ll_from_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:background="@drawable/black_border">
+
+                            <TextView
+                                android:id="@+id/tv_from_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerVertical="true"
+                                android:background="@android:color/transparent"
+                                android:gravity="center|left"
+                                android:hint="From Date"
+                                android:paddingLeft="5dp"
+                                android:singleLine="true"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+
+                                android:textColor="#333333"
+                                android:textColorHint="@color/black"
+                                android:textSize="16sp"
+                                android:textStyle="italic" />
+
+                            <ImageView
+                                android:layout_width="31.5dp"
+                                android:layout_height="31.5dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="2dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/calender"
+                                android:visibility="visible" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+
+                        android:id="@+id/ll_to_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="2"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:background="@drawable/black_border">
+
+                            <TextView
+                                android:id="@+id/tv_to_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_centerVertical="true"
+                                android:background="@android:color/transparent"
+                                android:gravity="center|left"
+                                android:hint="To Date"
+                                android:paddingLeft="5dp"
+                                android:textAppearance="?android:attr/textAppearanceSmall"
+                                android:textColor="#333333"
+                                android:textColorHint="@color/black"
+                                android:textSize="16sp"
+                                android:textStyle="italic" />
+
+                            <ImageView
+                                android:layout_width="31.5dp"
+                                android:layout_height="31.5dp"
+                                android:layout_alignParentRight="true"
+                                android:layout_centerVertical="true"
+                                android:layout_margin="2dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/calender" />
+                        </RelativeLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_search_button"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:gravity="center"
+                            android:layout_width="match_parent"
+                            android:layout_height="35dp"
+                            android:background="@color/colorAccent">
+
+
+                            <TextView
+
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:text="Search"
+                                android:textStyle="bold"
+                                android:textColor="@color/white"
+                                android:visibility="visible" />
+                        </RelativeLayout>
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
 
             <!--<RelativeLayout
                 android:id="@+id/rl_headerTextview"
@@ -76,15 +285,50 @@
                 android:layout_below="@+id/rl_headerTree"
                 android:background="@drawable/bg">-->
 
-            <TextView
-                android:id="@+id/tv_heading"
+
+            <LinearLayout
+
+                android:id="@+id/ll_notification"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/rl_headerTree"
-                android:layout_centerHorizontal="true"
-                android:layout_margin="15dp"
-                android:gravity="center"
-                android:text=" "
+                android:layout_gravity="center_vertical"
+                android:background="#eddf97"
+                android:visibility="gone"
+                android:weightSum="100">
+
+                <TextView
+                    android:id="@+id/tv_notification_need_approve"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="95"
+                    android:maxLines="2"
+                    android:paddingLeft="5dp"
+                    android:textColor="@color/black"
+                    android:textSize="12sp" />
+
+                <ImageView
+                    android:id="@+id/iv_notification_close"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginRight="5dp"
+                    android:layout_weight="5"
+                    android:background="@drawable/notificationclose"
+                    android:padding="10dp" />
+            </LinearLayout>
+
+            <TextView
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:paddingLeft="10dp"
+                android:id="@+id/tv_heading"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_notification"
+                android:background="@drawable/box_under_line"
+                android:gravity="left|center_horizontal"
                 android:textColor="@color/login_btn_unclicked"
                 android:textSize="@dimen/textheading" />
 
@@ -96,7 +340,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_below="@+id/tv_heading"
-                android:background="@drawable/bg"
+                android:background="@color/white"
                 android:orientation="vertical">
 
             </LinearLayout>
@@ -111,7 +355,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:weightSum="2">
+        android:weightSum="3">
 
         <com.andexert.library.RippleView
             android:id="@+id/rv_proposal"
@@ -129,15 +373,11 @@
                 android:elevation="10dp"
                 android:text="PENDING"
                 android:textColor="#fff"
-                android:textSize="20sp" />
+                android:textSize="16sp"
+                cipla:customFont="@string/raavi_regular" />
 
         </com.andexert.library.RippleView>
 
-        <View
-            android:layout_width="2dp"
-            android:layout_height="match_parent"
-
-            />
 
         <com.andexert.library.RippleView
             rv_centered="true"
@@ -150,12 +390,60 @@
                 android:id="@+id/btn_approved"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:background="@color/approved"
                 android:elevation="10dp"
                 android:text="APPROVED"
                 android:textColor="#fff"
-                android:textSize="20sp" />
+                android:textSize="16sp"
+                cipla:customFont="@string/raavi_regular" />
+
+        </com.andexert.library.RippleView>
+
+
+        <com.andexert.library.RippleView
+            android:id="@+id/rpv_rejected"
+            rv_centered="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="gone"
+            ripple:rv_type="rectangle">
+
+            <Button
+                android:id="@+id/btn_rejected"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/red"
+                android:elevation="10dp"
+                android:text="REJECTED"
+                android:textColor="#fff"
+                android:textSize="16sp"
+                cipla:customFont="@string/raavi_regular" />
+
+        </com.andexert.library.RippleView>
+
+
+        <com.andexert.library.RippleView
+            android:id="@+id/rpv_closed"
+            rv_centered="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="gone"
+            ripple:rv_type="rectangle">
+
+            <Button
+                android:id="@+id/btn_closed"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/closed"
+                android:elevation="10dp"
+                android:text="CLOSED"
+                android:textColor="#fff"
+                android:textSize="16sp"
+                cipla:customFont="@string/raavi_regular" />
         </com.andexert.library.RippleView>
     </LinearLayout>
 </RelativeLayout>
+
+

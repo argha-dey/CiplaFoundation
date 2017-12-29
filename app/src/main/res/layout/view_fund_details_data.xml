@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:cipla="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+
+    <com.ciplafoundation.utility.CustomTextView
+        android:id="@+id/tv_timeFrame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginTop="@dimen/textSubListChild_margin_Top"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/textSubListChild"
+        cipla:customFont="@string/raavi_regular"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="5dp">
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_marginTop="@dimen/textSubListChild_margin_Top"
+            android:layout_alignParentLeft="true"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubListChild"
+            android:textStyle="bold"
+            android:text="Cost (INR)"
+            cipla:customFont="@string/raavi_regular"
+            />
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_fundCost"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_marginTop="@dimen/textSubListChild_margin_Top"
+            android:layout_toRightOf="@+id/tv_timeFrame"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubListChild"
+            cipla:customFont="@string/raavi_regular"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="5dp">
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_marginTop="@dimen/textSubListChild_margin_Top"
+            android:layout_alignParentLeft="true"
+            android:textStyle="bold"
+            android:text="Tasks / Activities"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubListChild"
+            cipla:customFont="@string/raavi_regular"
+            />
+
+        <com.ciplafoundation.utility.CustomTextView
+            android:id="@+id/tv_task"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_marginTop="@dimen/textSubListChild_margin_Top"
+            android:layout_toRightOf="@+id/tv_timeFrame"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/textSubListChild"
+            cipla:customFont="@string/raavi_regular"
+           />
+    </LinearLayout>
+</LinearLayout>

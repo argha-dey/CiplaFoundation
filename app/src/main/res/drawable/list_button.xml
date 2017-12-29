@@ -7,17 +7,15 @@
 
 
     <shape>
-
     <stroke android:color="#767676" android:width="0dp"/>
 
     <corners android:radius="0dp"/>
 
-    <solid android:color="#acabab"/>
+        <solid android:color="@color/listColor"/>
 
 </shape>
 
 </item>
-
 
     <item android:state_pressed="false">
 
@@ -31,12 +29,11 @@
     <corners android:radius="0dp"/>
 
 
-
-
-    <solid android:color="@color/listColor"/>
-
 </shape>
 
 </item>
 
 </selector>
+
+<!--
+<solid android:color="#acabab"/>-->

@@ -3,7 +3,7 @@
 
    <!-- <item android:drawable="@drawable/list_background" android:state_focused="true"></item>-->
     <item android:drawable="@drawable/gradient_bg_hover" android:state_pressed="true"></item>
-    <!--<item android:drawable="@drawable/list_background"></item>-->
+ <!--   <item android:drawable="@drawable/list_background"></item>-->
      
 </selector>
 

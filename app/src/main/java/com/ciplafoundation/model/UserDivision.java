@@ -1,6 +1,6 @@
 package com.ciplafoundation.model;
 
-import com.google.android.gms.maps.model.LatLng;
+
 
 import java.io.Serializable;
 

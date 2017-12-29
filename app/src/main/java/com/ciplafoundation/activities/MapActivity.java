@@ -5,25 +5,22 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.ciplafoundation.R;
+import com.ciplafoundation.model.UserClass;
 import com.ciplafoundation.model.UserDivision;
 import com.ciplafoundation.services.VolleyTaskManager;
 import com.ciplafoundation.utility.AlertDialogCallBack;
 import com.ciplafoundation.utility.Prefs;
 import com.ciplafoundation.utility.ServerResponseCallback;
 import com.ciplafoundation.utility.Util;
-import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
@@ -32,7 +29,6 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.PolylineOptions;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -50,11 +46,15 @@ public class MapActivity extends BaseActivity implements
     private Context mContext;
     private VolleyTaskManager volleyTaskManager;
     private Prefs prefs;
-    private boolean isUserDivision=false;
-    private String user_id="";
-    private ArrayList<UserDivision> arrlistUserDivision=new ArrayList<>();
+    private boolean isUserDivision = false, isResetRolePasswordForDiffrenceuser = false;
+    private String user_id = "";
+    private ArrayList<UserDivision> arrlistUserDivision = new ArrayList<>();
     private ArrayList<Marker> mapmarker;
     private Marker marker;
+    private Button btn_dashboard;
+    private UserClass user = new UserClass();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,30 +63,44 @@ public class MapActivity extends BaseActivity implements
         initMap();
     }
 
-    private void init()
-    {
-        mContext=MapActivity.this;
-        volleyTaskManager=new VolleyTaskManager(mContext);
+    private void init() {
+        mContext = MapActivity.this;
+        volleyTaskManager = new VolleyTaskManager(mContext);
         prefs = new Prefs(mContext);
-        user_id=Util.fetchUserClass(mContext).getUserId();
-        setViewShowHide(false,false,true);
+        user_id = Util.fetchUserClass(mContext).getUserId();
+        btn_dashboard = (Button) findViewById(R.id.btn_dashboard);
+        prefs.setDivisionId("");
+
+
+        setViewShowHide(false, false, true);
+
+      /*  if(getResources().getBoolean(R.bool.isTablet))
+            btn_dashboard.setVisibility(View.VISIBLE);*/
+
         if (Util.checkConnectivity(mContext))
-        UserDivisionWebServiceCalling(user_id);
-        else
-        {
+            UserDivisionWebServiceCalling(user_id);
+        else {
             //Util.showMessageWithOk(mContext,getString(R.string.no_internet));
-            Util.showCallBackMessageWithOk(mContext,getString(R.string.no_internet),new AlertDialogCallBack() {
-                        @Override
-                        public void onSubmit() {
-                            finish();
-                        }
+            Util.showCallBackMessageWithOk(mContext, getString(R.string.no_internet), new AlertDialogCallBack() {
+                @Override
+                public void onSubmit() {
+                    finish();
+                }
 
-                        @Override
-                        public void onCancel() {
+                @Override
+                public void onCancel() {
 
-                        }
-                    });
+                }
+            });
         }
+
+       /* btn_dashboard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent project=new Intent(MapActivity.this,WebViewActivity.class);
+                startActivity(project);
+            }
+        });*/
 
     }
 
@@ -99,7 +113,7 @@ public class MapActivity extends BaseActivity implements
     @Override
     public void onMapReady(GoogleMap map) {
 
-        googleMap=map;
+        googleMap = map;
         //googleMap.setMyLocationEnabled(true);
         googleMap.getUiSettings().setMapToolbarEnabled(false);
         googleMap.getUiSettings().setZoomControlsEnabled(true);
@@ -117,7 +131,7 @@ public class MapActivity extends BaseActivity implements
             }
         });*/
 
-        LatLng latLng = new LatLng(20.5937,78.9629);
+        LatLng latLng = new LatLng(20.5937, 78.9629);
         googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
         //googleMap.addMarker(new MarkerOptions().position(latLng).title("Chiranjit"));
         googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
@@ -130,8 +144,8 @@ public class MapActivity extends BaseActivity implements
 
             @Override
             public View getInfoContents(final Marker marker) {
-                View v=getLayoutInflater().inflate(R.layout.info_window,null);
-                TextView tv_info_division_name=(TextView)v.findViewById(R.id.tv_info_division_name);
+                View v = getLayoutInflater().inflate(R.layout.info_window, null);
+                TextView tv_info_division_name = (TextView) v.findViewById(R.id.tv_info_division_name);
                 tv_info_division_name.setText(marker.getTitle());
                 return v;
             }
@@ -139,11 +153,12 @@ public class MapActivity extends BaseActivity implements
         googleMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                if(marker.isInfoWindowShown())
+                if (marker.isInfoWindowShown())
                     marker.hideInfoWindow();
-                String division_id=marker.getSnippet();
+                String division_id = marker.getSnippet();
                 prefs.setDivisionId(division_id);
-                Intent i=new Intent(mContext, TaskActivity.class);
+                Intent i = new Intent(mContext, TaskActivity.class);
+                i.putExtra("DivisionId",division_id);
                 startActivity(i);
                 overridePendingTransition(R.anim.activity_right_in, R.anim.activity_right_out);
             }
@@ -152,29 +167,27 @@ public class MapActivity extends BaseActivity implements
 
     }
 
-    private void UserDivisionWebServiceCalling(String user_id)
-    {
-        isUserDivision=true;
-        String params="USR_USER_ID="+user_id;
-        volleyTaskManager.doGetUserDivision(params,true);
+    private void UserDivisionWebServiceCalling(String user_id) {
+        isUserDivision = true;
+        String params = "USR_USER_ID=" + user_id;
+        volleyTaskManager.doGetUserDivision(params, true);
     }
 
     @Override
     public void onSuccess(JSONObject resultJsonObject) {
 
-        Log.v("resultJsonObject",""+resultJsonObject);
-        if(isUserDivision)
-        {
-            isUserDivision=false;
+        // Log.v("resultJsonObject",""+resultJsonObject);
+        if (isUserDivision) {
+            isUserDivision = false;
             if (resultJsonObject.optString("status").equalsIgnoreCase("true")) {
 
-                JSONArray detailsJsonArray=resultJsonObject.optJSONArray("details");
+                JSONArray detailsJsonArray = resultJsonObject.optJSONArray("details");
                 if (detailsJsonArray != null && detailsJsonArray.length() > 0) {
                     arrlistUserDivision.clear();
                     for (int i = 0; i < detailsJsonArray.length(); i++) {
                         JSONObject detailsJsonObject = detailsJsonArray.optJSONObject(i);
 
-                        UserDivision userDivision=new UserDivision();
+                        UserDivision userDivision = new UserDivision();
                         userDivision.setDivisionId(detailsJsonObject.optString("id"));
                         userDivision.setName(detailsJsonObject.optString("name"));
                         userDivision.setLat(detailsJsonObject.optString("lat"));
@@ -196,6 +209,7 @@ public class MapActivity extends BaseActivity implements
             }
 
         }
+
     }
 
     @Override
@@ -203,24 +217,27 @@ public class MapActivity extends BaseActivity implements
 
     }
 
-    /****** Add marker on map *********/
+    /******
+     * Add marker on map
+     *********/
     void addMarker() {
         googleMap.clear();
         mapmarker = new ArrayList<Marker>();
         View v = ((LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.custom_marker, null);
-        TextView tv_divisionName=(TextView)v.findViewById(R.id.tv_divisionName);
-        Log.v("arrlist Size: ",""+arrlistUserDivision.size());
+        TextView tv_divisionName = (TextView) v.findViewById(R.id.tv_divisionName);
+        //Log.v("arrlist Size: ",""+arrlistUserDivision.size());
+        //System.out.println("");
 
         for (int j = 0; j < arrlistUserDivision.size(); j++) {
             //mMap.animateCamera(CameraUpdateFactory.zoomTo(8), 2000, null);
             tv_divisionName.setText(arrlistUserDivision.get(j).getName());
            /* marker = googleMap.addMarker(new MarkerOptions().position(arrlistUserDivision.get(j).getLatLng()).snippet(String.valueOf(j))*/
-            marker = googleMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(arrlistUserDivision.get(j).getLat()),Double.parseDouble(arrlistUserDivision.get(j).getLng())))
-                        .snippet(String.valueOf(j))
-                        //.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(this, v)))
-                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_blue))
-                        .snippet(arrlistUserDivision.get(j).getDivisionId())
-                        .title(arrlistUserDivision.get(j).getName()));
+            marker = googleMap.addMarker(new MarkerOptions().position(new LatLng(Double.parseDouble(arrlistUserDivision.get(j).getLat()), Double.parseDouble(arrlistUserDivision.get(j).getLng())))
+                    .snippet(String.valueOf(j))
+                    //.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(this, v)))
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.marker_blue))
+                    .snippet(arrlistUserDivision.get(j).getDivisionId())
+                    .title(arrlistUserDivision.get(j).getName()));
 
             mapmarker.add(marker);
         }
@@ -249,4 +266,6 @@ public class MapActivity extends BaseActivity implements
         //Toast.makeText(mContext,""+marker.getSnippet(),Toast.LENGTH_SHORT).show();
         return false;
     }
+
+
 }

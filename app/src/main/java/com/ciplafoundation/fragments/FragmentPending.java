@@ -2,23 +2,19 @@ package com.ciplafoundation.fragments;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.ciplafoundation.R;
 import com.ciplafoundation.activities.FragmentBaseActivity;
-import com.ciplafoundation.model.DataProposalList;
 import com.ciplafoundation.adapter.AdapterPendingProposalList;
 import com.ciplafoundation.model.PendingProposal;
 import com.ciplafoundation.utility.Util;
@@ -35,12 +31,13 @@ public class FragmentPending extends Fragment
 
     private Activity activity;
     private static TextView tv_heading;
-    private static LinearLayout ll_pending_approved;
+    private static LinearLayout ll_pending_approved,search_layout;
     private RecyclerView rv_pending_proposal_list;
     private TextView tv_norecord;
     private FragmentTransaction fragmentTransaction;
     private LinearLayoutManager mPendingLayoutManager;
     private AdapterPendingProposalList adapterPendingProposalList;
+    private String headerText="Pending Proposal List";
    // private SwipeRefreshLayout swipeRefreshLayout;
 
     public static FragmentPending newInstance(TextView _tv_heading,LinearLayout _ll_pending_approved) {
@@ -54,6 +51,7 @@ public class FragmentPending extends Fragment
 
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //Log.d("test","Fragment Pending");
         View rootView = inflater.inflate(R.layout.fragment_pending, container, false);
         initComponent(rootView);
         return rootView;
@@ -78,16 +76,20 @@ public class FragmentPending extends Fragment
         rv_pending_proposal_list.setLayoutManager(mPendingLayoutManager);
         adapterPendingProposalList = new AdapterPendingProposalList(activity);
         ArrayList<PendingProposal> arrPendingProposal= Util.fetchPendingProposal(activity);
+
+        if(FragmentBaseActivity.task!=null && FragmentBaseActivity.task.equalsIgnoreCase("project"))
+            headerText="Pending Project List";
+
         if(arrPendingProposal!=null && arrPendingProposal.size()>0)
         {
-            tv_heading.setText("Pending Proposal List");
+            tv_heading.setText(headerText);
             tv_heading.setTextColor(getContext().getResources().getColor(R.color.pending));
             tv_norecord.setVisibility(View.GONE);
             adapterPendingProposalList.AddArray(arrPendingProposal);
             rv_pending_proposal_list.setAdapter(adapterPendingProposalList);
         }
         else{
-            tv_heading.setText("Pending Proposal List");
+            tv_heading.setText(headerText);
             tv_heading.setTextColor(getContext().getResources().getColor(R.color.pending));
             tv_norecord.setVisibility(View.VISIBLE);
             rv_pending_proposal_list.setVisibility(View.GONE);

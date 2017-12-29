@@ -10,7 +10,6 @@ import android.graphics.drawable.shapes.RoundRectShape;
 import android.text.TextUtils.TruncateAt;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -37,7 +36,7 @@ import java.util.List;
  * @author st0le
  */
 @SuppressWarnings("unused")
-public class DropDownViewForXML extends TextView implements
+public class DropDownViewForXML extends android.support.v7.widget.AppCompatTextView implements
         OnClickListener,
         OnItemClickListener, OnDismissListener, OnItemSelectedListener,View.OnFocusChangeListener {
 
@@ -133,8 +132,8 @@ public class DropDownViewForXML extends TextView implements
 //          lv.setBackgroundDrawable(listDrawable);
             lv.setBackgroundResource(R.drawable.blue_border_box); // <-- uncomment this
             lv.setAdapter(adapter);
-            ColorDrawable green = new ColorDrawable(Color.parseColor("#0164a7"));
-            lv.setDivider(green);
+            ColorDrawable black = new ColorDrawable(Color.parseColor("#808080"));
+            lv.setDivider(black);
             lv.setDividerHeight(2);
 //          lv.setDivider(getResources().getDrawable(R.drawable.line_orange));
             lv.setOnItemClickListener(this);
@@ -275,7 +274,7 @@ public class DropDownViewForXML extends TextView implements
 
     @Override
     public void onFocusChange(View v, boolean hasFocus) {
-        Log.v("OnFocusChange","Called!!!!");
+        //Log.v("OnFocusChange","Called!!!!");
     }
 
 
@@ -320,8 +319,8 @@ public class DropDownViewForXML extends TextView implements
                 convertView = newView();
                 viewHolder = new ViewHolder();
                 viewHolder.tvText = (TextView) convertView.findViewById(android.R.id.text1);
-//              viewHolder.tvText.setTextColor(Color.BLACK);
-                viewHolder.tvText.setTextColor(Color.parseColor("#0164a7"));
+             viewHolder.tvText.setTextColor(Color.BLACK);
+               // viewHolder.tvText.setTextColor(Color.parseColor("#0164a7"));
                 viewHolder.tvText.setPadding(10, 0, 10, 0);
                 viewHolder.tvText.setGravity(Gravity.CENTER_VERTICAL);
                 viewHolder.tvText.setHeight(getMeasuredHeight());

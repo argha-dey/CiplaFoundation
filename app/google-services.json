@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1023351140458",
+    "firebase_url": "https://ciplafoundation-837e6.firebaseio.com",
+    "project_id": "ciplafoundation-837e6",
+    "storage_bucket": "ciplafoundation-837e6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1023351140458:android:0157c27268ed25a8",
+        "android_client_info": {
+          "package_name": "com.ciplafoundation"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1023351140458-505kdirhq9spjo717ft1ap4sb2f9hgob.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ciplafoundation",
+            "certificate_hash": "23b8610065346c72a42f601642debdbe8d2e61cf"
+          }
+        },
+        {
+          "client_id": "1023351140458-lolm92n136dn4290ajeqdfnln9lqcskf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA4PCRhySCvttWfeBAf_X7E070A0ViGows"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1023351140458-lolm92n136dn4290ajeqdfnln9lqcskf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

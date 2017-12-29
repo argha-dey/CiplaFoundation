@@ -1,7 +1,6 @@
 package com.ciplafoundation.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 public class UserClass implements Serializable {
 
@@ -19,6 +18,16 @@ public class UserClass implements Serializable {
 	private String password = "";
 	private boolean isRemember = false;
 	private boolean isLoggedin = false;
+
+	public String getTokenId() {
+		return tokenId;
+	}
+
+	public void setTokenId(String tokenId) {
+		this.tokenId = tokenId;
+	}
+
+	private String tokenId="";
 
 	public String getName() {
 		return name;

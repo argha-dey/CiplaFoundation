@@ -79,6 +79,24 @@ public class Prefs {
     }
 
 
+    public String getRoleId() {
+        return getString(Constants.ROLE_ID, "");
+    }
+
+    public void setRoleId(String val) {
+        setString(Constants.ROLE_ID, val);
+    }
+
+
+    public void setProposalCreatorId(String val){
+        setString(Constants.PROPOSAL_CREATERID, val);
+    }
+    public String getProposalCreatorId(){
+        return getString(Constants.PROPOSAL_CREATERID, "");
+    }
+
+
+
     public String getDivisionId() {
         return getString(Constants.DIVISIONID, "");
     }
@@ -86,6 +104,18 @@ public class Prefs {
     public void setDivisionId(String val) {
         setString(Constants.DIVISIONID, val);
     }
+
+
+
+    public String getTokenId(){
+        return getString(Constants.TOKENID, "");
+    }
+
+    public void setTokenId(String val) {
+        setString(Constants.TOKENID, val);
+    }
+
+
 
     public String getDivisionName() {
         return getString(Constants.DIVISIONNAME, "");
@@ -96,14 +126,37 @@ public class Prefs {
     }
 
     public boolean getIsProjectDetails() {
-        return getBoolean(Constants.ISPROJECTDETAILS,false);
+        return getBoolean(Constants.ISPROJECTDETAILS, false);
     }
+
+
 
     public void setIsProjectDetails(boolean val) {
         setBoolean(Constants.ISPROJECTDETAILS, val);
     }
 
 
+    public void setIsProposalDetails(boolean val) {
+        setBoolean(Constants.ISPROPOSALDETAILS, val);
+    }
+
+    public void setIsEventDetails(boolean val) {
+        setBoolean(Constants.EVENTDETAILS, val);
+    }
+    public boolean getEventDetails()
+    {
+        return getBoolean(Constants.EVENTDETAILS, false);
+    }
+    public boolean getIsProposalDetails() {
+        return getBoolean(Constants.ISPROPOSALDETAILS, false);
+    }
+
+    public boolean getIsMadicalDetails() {
+        return getBoolean(Constants.ISMEDIVALDETAILS, false);
+    }
+    public void setIsMadicalDetails(boolean val) {
+        setBoolean(Constants.ISMEDIVALDETAILS, val);
+    }
 
 
 
@@ -112,5 +165,7 @@ public class Prefs {
         setDivisionId("");
         setDivisionName("");
         setIsProjectDetails(false);
+        setIsProposalDetails(false);
+        setIsMadicalDetails(false);
     }
 }

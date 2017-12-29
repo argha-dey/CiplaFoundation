@@ -1,27 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:ripple="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/top_header"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/login"
-    android:orientation="vertical">
+              xmlns:ripple="http://schemas.android.com/apk/res-auto"
+              android:id="@+id/top_header"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@drawable/login"
+              android:gravity="center"
+              android:orientation="vertical">
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:paddingLeft="15dp"
         android:paddingRight="15dp">
+
+        <com.andexert.library.RippleView
+            android:id="@+id/rv_dashboard"
+            rv_centered="true"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:visibility="gone"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            ripple:rv_rippleDuration="500"
+            ripple:rv_type="rectangle">
+
+            <Button
+                android:id="@+id/btn_dashboard"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@drawable/event"
+                android:text="@string/dashboard"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
+
+        </com.andexert.library.RippleView>
 
         <com.andexert.library.RippleView
             android:id="@+id/rv_proposal"
             rv_centered="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/rv_dashboard"
             android:layout_marginTop="15dp"
-            ripple:rv_type="rectangle"
-            ripple:rv_rippleDuration="500">
+            ripple:rv_rippleDuration="500"
+            ripple:rv_type="rectangle">
 
             <Button
                 android:id="@+id/btn_proposal"
@@ -29,9 +55,9 @@
                 android:layout_height="100dp"
                 android:background="@drawable/proposal"
                 android:text="@string/proposal"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textAppearance="?android:attr/textAppearanceMedium"/>
+                android:textStyle="bold"/>
         </com.andexert.library.RippleView>
 
 
@@ -42,8 +68,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/rv_proposal"
             android:layout_marginTop="15dp"
-            ripple:rv_type="rectangle"
-            ripple:rv_rippleDuration="500">
+            ripple:rv_rippleDuration="500"
+            ripple:rv_type="rectangle">
 
             <Button
                 android:id="@+id/btn_project"
@@ -51,9 +77,9 @@
                 android:layout_height="100dp"
                 android:background="@drawable/project"
                 android:text="@string/project"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textStyle="bold"/>
         </com.andexert.library.RippleView>
 
 
@@ -65,8 +91,8 @@
             android:layout_below="@+id/rv_project"
             android:layout_marginTop="15dp"
             android:gravity="center"
-            ripple:rv_type="rectangle"
-            ripple:rv_rippleDuration="500">
+            ripple:rv_rippleDuration="500"
+            ripple:rv_type="rectangle">
 
             <Button
                 android:id="@+id/btn_event"
@@ -74,9 +100,34 @@
                 android:layout_height="100dp"
                 android:background="@drawable/event"
                 android:text="@string/event"
+                android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/black"
-                android:textStyle="bold"
-                android:textAppearance="?android:attr/textAppearanceMedium" />
+                android:textStyle="bold"/>
+
+        </com.andexert.library.RippleView>
+
+
+        <com.andexert.library.RippleView
+            android:visibility="gone"
+            android:id="@+id/rv_medical_grant"
+            rv_centered="true"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_below="@+id/rv_event"
+            android:layout_marginTop="15dp"
+            android:gravity="center"
+            ripple:rv_rippleDuration="300"
+            ripple:rv_type="rectangle">
+
+            <Button
+                android:id="@+id/btn_medical_grant"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:background="@color/grey"
+                android:text="@string/medicalgrant"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/black"
+                android:textStyle="bold"/>
 
         </com.andexert.library.RippleView>
 

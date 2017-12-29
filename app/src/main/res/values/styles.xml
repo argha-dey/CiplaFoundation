@@ -68,6 +68,11 @@
     <declare-styleable name="ViewStyle">
         <attr name="customFont" format="string" />
     </declare-styleable>
+    <style name="dialogTheme" parent="@android:style/Theme.Holo.Light.Dialog">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowCloseOnTouchOutside">false</item>
+    </style>
+
 
 </resources>
 

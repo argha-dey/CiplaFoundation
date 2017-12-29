@@ -5,21 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <android.support.v7.widget.CardView
-        android:id="@+id/card_view_pending"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="3dp"
-        android:layout_marginBottom="10dp"
-        card_view:cardCornerRadius="1dp"
-        card_view:cardElevation="2dp"
-        card_view:cardUseCompatPadding="false">
+
 
     <RelativeLayout
         android:id="@+id/rl_pending_header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/list_shadow"
+        android:background="@drawable/box_under_line"
         android:padding="10dp">
 
         <com.ciplafoundation.utility.CustomTextView
@@ -29,7 +21,6 @@
             android:layout_toLeftOf="@+id/ib_btn_pending_details"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true"
-            android:ellipsize="marquee"
             android:marqueeRepeatLimit="marquee_forever"
             android:scrollHorizontally="true"
             android:maxLines="1"
@@ -54,17 +45,17 @@
             android:layout_centerVertical="true"
             android:background="@drawable/accrodian_drop" />
     </RelativeLayout>
-</android.support.v7.widget.CardView>
+
 
     <RelativeLayout
         android:id="@+id/rl_pending_child"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/card_view_pending"
-        android:layout_marginBottom="@dimen/rl_child_marginBottom"
-        android:paddingLeft="8dp"
-        android:background="@color/listColor"
-        android:visibility="gone">
+        android:layout_below="@+id/rl_pending_header"
+        android:paddingBottom="5dp"
+        android:background="@drawable/box_under_line"
+        android:visibility="gone"
+        >
 
         <com.ciplafoundation.utility.CustomTextView
             android:id="@+id/tv_timeline_data"
@@ -175,6 +166,10 @@
             android:textSize="@dimen/textSubListChild"
             cipla:customFont="@string/raavi_regular"/>
 
+
+
+
+
         <com.ciplafoundation.utility.CustomTextView
             android:id="@+id/tv_created"
             android:layout_width="match_parent"
@@ -182,7 +177,7 @@
             android:layout_below="@+id/tv_budget_data_view"
             android:layout_marginLeft="5dp"
             android:layout_marginTop="@dimen/textSubList_margin_Top"
-            android:text="Created"
+            android:text="Created By"
             android:textColor="@android:color/black"
             android:textSize="@dimen/textSubList"
             android:textStyle="bold"

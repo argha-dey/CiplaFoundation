@@ -10,22 +10,54 @@ public class UserRole implements Serializable {
 
     private static final long serialVersionUID = 2L;
 
-    private String role_id="";
-    private String role_name="";
 
-    public String getRole_id() {
-        return role_id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setRole_id(String role_id) {
-        this.role_id = role_id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getRole_name() {
-        return role_name;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setRole_name(String role_name) {
-        this.role_name = role_name;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
+
+    public String getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    private String userId="";
+    private String userName="";
+    private String   roleId="";
+    private String role="";
+
+    public  UserRole(String userId,String userName,String roleId,String role){
+        this.userId=userId;
+        this.userName=userName;
+        this.roleId=roleId;
+        this.role=role;
+
+    }
+    public UserRole(){
+
+    }
+
+
 }

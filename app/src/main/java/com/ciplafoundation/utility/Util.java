@@ -1,17 +1,25 @@
 package com.ciplafoundation.utility;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
+import android.os.Environment;
 import android.os.Handler;
+import android.provider.DocumentsContract;
+import android.provider.MediaStore;
+import android.provider.OpenableColumns;
 import android.provider.Settings;
 import android.support.v4.app.FragmentActivity;
 import android.telephony.TelephonyManager;
@@ -27,16 +35,23 @@ import android.widget.Toast;
 import com.ciplafoundation.R;
 import com.ciplafoundation.interfaces.InterfaceDialogCallback;
 import com.ciplafoundation.model.AcceptedProposal;
+import com.ciplafoundation.model.FileDetails;
 import com.ciplafoundation.model.PendingProposal;
 import com.ciplafoundation.model.UserClass;
 import com.ciplafoundation.model.UserDivision;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -47,6 +62,9 @@ public class Util {
     private static String USERDIVISIONLIST = "USERDIVISIONLIST";
     private static String ACCEPTEDPROPOSALLIST = "ACCEPTEDPROPOSALLIST";
     private static String PENDINGPROPOSALLIST = "PENDINGPROPOSALLIST";
+    private static String CLOSEDPROJECTLIST = "CLOSEDPROJECTLIST";
+    private static String REJECTEDPROJECTLIST = "REJECTEDPROJECTLIST";
+
 
   static   Context mContext;
 
@@ -62,12 +80,7 @@ public class Util {
                         if (interfaceDialogCallback != null)
                             interfaceDialogCallback.onClickAlertPositiveButton();
                     }
-                }).setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        }).show();
+                }).show();
     }
 
     public static boolean checkConnectivity(Context context) {
@@ -215,6 +228,8 @@ public class Util {
         return arrAcceptedProposal;
     }
 
+
+
     // Saving PendingProposal details
     public static void savePendingProposal(final Context mContext, ArrayList<PendingProposal> userDivisionList) {
         SharedPreferences pwdPrefs = mContext.getSharedPreferences(Constants.PENDING_PROPOSAL, Context.MODE_PRIVATE);
@@ -226,6 +241,36 @@ public class Util {
         }
         prefsEditor.commit();
     }
+
+
+
+    // Saving closed Project details
+    public static void saveClosedProject(final Context mContext, ArrayList<PendingProposal> userDivisionList) {
+        SharedPreferences pwdPrefs = mContext.getSharedPreferences(Constants.CLOSED_PROJECT, Context.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = pwdPrefs.edit();
+        try {
+            prefsEditor.putString(CLOSEDPROJECTLIST, ObjectSerializer.serialize(userDivisionList));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        prefsEditor.commit();
+    }
+
+    // REJECTEDPROJECTLIST..
+
+    public static void saveRejectedProject(final Context mContext, ArrayList<PendingProposal> userDivisionList) {
+        SharedPreferences pwdPrefs = mContext.getSharedPreferences(Constants.REJECTED_PROJECT, Context.MODE_PRIVATE);
+        SharedPreferences.Editor prefsEditor = pwdPrefs.edit();
+        try {
+            prefsEditor.putString(REJECTEDPROJECTLIST, ObjectSerializer.serialize(userDivisionList));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        prefsEditor.commit();
+    }
+
+
+
 
     // Fetching UserDivision details
     public static ArrayList<PendingProposal> fetchPendingProposal(final Context mContext) {
@@ -244,6 +289,45 @@ public class Util {
 
         return arrPendingProposal;
     }
+    // Fetching Closed project details
+    public static ArrayList<PendingProposal> fetchClosedProject(final Context mContext) {
+        SharedPreferences pwdPrefs = mContext.getSharedPreferences(Constants.CLOSED_PROJECT, Context.MODE_PRIVATE);
+        ArrayList<PendingProposal> arrPendingProposal = null;
+        String serializeOrg = pwdPrefs.getString(CLOSEDPROJECTLIST, null);
+        try {
+            if (serializeOrg != null) {
+                arrPendingProposal = (ArrayList<PendingProposal>) ObjectSerializer.deserialize(serializeOrg);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return arrPendingProposal;
+    }
+
+
+
+
+    // Fetching REJECTEDPROJECTLIST project details
+    public static ArrayList<PendingProposal> fetchRejectedProject(final Context mContext) {
+        SharedPreferences pwdPrefs = mContext.getSharedPreferences(Constants.REJECTED_PROJECT, Context.MODE_PRIVATE);
+        ArrayList<PendingProposal> arrPendingProposal = null;
+        String serializeOrg = pwdPrefs.getString(REJECTEDPROJECTLIST, null);
+        try {
+            if (serializeOrg != null) {
+                arrPendingProposal = (ArrayList<PendingProposal>) ObjectSerializer.deserialize(serializeOrg);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return arrPendingProposal;
+    }
+
 
     public static void buildAlertMessageNoGps(final Context context) {
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -274,7 +358,6 @@ public class Util {
             public void run() {
                 final AlertDialog.Builder alert = new AlertDialog.Builder(mContext);
                 alert.setTitle(R.string.app_name);
-
                 alert.setMessage(message);
                 alert.setPositiveButton("Ok",
                         new DialogInterface.OnClickListener() {
@@ -282,6 +365,7 @@ public class Util {
 
                             }
                         });
+                alert.setCancelable(false);
                 alert.show();
             }
         });
@@ -304,6 +388,7 @@ public class Util {
                                 callBack.onSubmit();
                             }
                         });
+                alert.setCancelable(false);
                 alert.show();
             }
         });
@@ -358,6 +443,7 @@ public class Util {
                                 callBack.onCancel();
                             }
                         });
+                alert.setCancelable(false);
                 alert.show();
             }
         });
@@ -541,7 +627,7 @@ public class Util {
 
         // 1dp/ms
         //a.setDuration((int) (targetHeight / v.getContext().getResources().getDisplayMetrics().density));
-       a.setDuration(600);
+        a.setDuration(600);
         v.startAnimation(a);
     }
     ///colapes/
@@ -617,5 +703,260 @@ public class Util {
     }
 
 
+  public static String textIfNull(String text)
+  {
+     if(!text.equalsIgnoreCase("null"))
+         return text;
+      else
+         return "";
 
+  }
+
+
+    /*****
+     *
+     * @return {@link String} the name of the file of Image
+     */
+    //take default file path for image
+    public static String getDefaultFilePathForImg(){
+        // create a File object for the parent directory
+        File prntFile = new File(Environment.getExternalStorageDirectory().getPath()+"/Cipla/Img/");
+        //Log.d("fdfs", "Environment.getExternalStorageDirectory().getPath()="+Environment.getExternalStorageDirectory().getPath());
+        // have the object build the directory structure, if needed.
+        prntFile.mkdirs();
+        String getDestinationFileFortakePic = prntFile.getAbsolutePath()+"/cipla_"+System.currentTimeMillis()+".jpg";
+
+        return getDestinationFileFortakePic;
+    }
+
+    //check if choose file is image or video
+    @SuppressLint("DefaultLocale")
+    public static int checkFileExtension(Context context,Uri selectedFile){
+        int type = -1;
+        try{
+            ContentResolver cR = context.getContentResolver();
+            String extention = cR.getType(selectedFile);
+
+
+            if(extention!=null){
+                //checking for  extention
+                for (String extensionval : Constants.fileTypes)
+                {
+                    if (extention.toLowerCase().contains(extensionval))
+                    {
+                        type = 1;
+                        break;
+                    }
+                }
+            }else{
+                String extention1 = selectedFile.getPath();
+                //checking for image extention
+                for (String extensionval :  Constants.fileTypes)
+                {
+                    if (extention1.toLowerCase().contains(extensionval))
+                    {
+                        type = 1;
+                        break;
+                    }
+                }
+
+            }
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return type;
+    }
+
+    /*
+     * get  file path from uri for above kitkat
+     * type 0 for video,1 for image
+     */
+    @SuppressLint("NewApi")
+    public static String getRealPathFromURIAboveKitkat(Context mContext,Uri contentUri) {
+
+        String filePath = null;
+
+        try{
+            // Will return "image:x*"
+            String wholeID = DocumentsContract.getDocumentId(contentUri);
+            //Log.e("dalmia", "wholeID--"+wholeID);
+            // Split at colon, use second item in the array
+            String id = wholeID.split(":")[1];
+
+            String[] column = new String[1];
+            String sel ="";
+            Cursor cursor = null;
+            column[0] = MediaStore.Files.FileColumns.DATA ;
+            sel =  MediaStore.Video.Media._ID + "=?" ;
+            cursor = mContext.getContentResolver().
+                    query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI,
+                            column, sel, new String[]{ id }, null);
+
+            int columnIndex = cursor.getColumnIndex(column[0]);
+
+            if (cursor.moveToFirst()) {
+                filePath = cursor.getString(columnIndex);
+            }
+
+            cursor.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+
+        return filePath;
+    }
+
+
+    /*
+     * get path before kitkat
+     */
+    public static String getRealPathFromURIBeforKitkat(Context mContext,Uri contentUri) {
+
+        String filePath = null;
+
+        try{
+            String[] filePathColumn = new String[1];
+
+
+            filePathColumn[0] = MediaStore.Files.FileColumns.DATA ;
+
+            Cursor cursor = mContext.getContentResolver().query(contentUri, filePathColumn, null, null, null);
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            filePath = cursor.getString(columnIndex);
+            cursor.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return filePath;
+    }
+
+    public static FileDetails getSelectedFile(Context mcontext, Uri selectedFile)
+    {
+        FileDetails file = null;
+        int actionType=Util.checkFileExtension(mcontext, selectedFile);
+        try {
+            // String mimeType = mcontext.getContentResolver().getType(selectedFile);
+            Cursor cursor = mcontext.getContentResolver().query(selectedFile, null, null, null, null);
+            String fileName = cursor.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME));
+            int sizeIndex = cursor.getColumnIndex(OpenableColumns.SIZE);
+            InputStream input= mcontext.getContentResolver().openInputStream(selectedFile);
+            cursor.moveToFirst();
+
+            file=new FileDetails();
+            file.setFileName(fileName);
+            file.setFileSize(sizeIndex);
+            file.setInputStream(input);
+            file.setActionType(actionType);
+            //Log.e("dalm ia", "displayName=--"+fileName);
+        } catch (IOException e) {
+
+            e.printStackTrace();
+        }
+        return file;
+
+    }
+
+
+    /**
+     * Method to add all elements of an array
+     */
+    public static float addAllValue(float[] arrFloat) {
+        float sum = 0;
+        if(arrFloat != null && arrFloat.length>0)
+        {
+            for (int i = 0; i < arrFloat.length; i++) {
+
+                sum=sum+arrFloat[i];
+            }
+        }
+        return sum;
+    }
+
+    /**
+     * if this value exists or not
+     */
+    public static boolean isExist(String[] array,String val ) {
+
+        for(String s: array)
+        {
+            if(s.equalsIgnoreCase(val))
+            {
+                return true;
+            }
+
+        }
+        return false;
+
+    }
+
+    public static void showCallBackMessageWithOkCancelCustomButton(final Context mContext, final String message,
+                                                                   final String positiveButton, final String negativeButton, final AlertDialogCallBack callBack) {
+        ((Activity) mContext).runOnUiThread(new Runnable() {
+
+            public void run() {
+                final AlertDialog.Builder alert = new AlertDialog.Builder(
+                        mContext);
+                alert.setTitle(R.string.app_name);
+                alert.setCancelable(false);
+                alert.setMessage(message);
+                alert.setPositiveButton(positiveButton,
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int whichButton) {
+                                callBack.onSubmit();
+                            }
+                        });
+                alert.setNegativeButton(negativeButton,
+                        new DialogInterface.OnClickListener() {
+
+                            @Override
+                            public void onClick(DialogInterface dialog,
+                                                int whichButton) {
+                                callBack.onCancel();
+                            }
+                        });
+                alert.show();
+            }
+        });
+    }
+
+    public static boolean ifListHasNewFile(ArrayList<FileDetails> fileDetailsList)
+    {
+        if(fileDetailsList.size()>0) {
+            boolean result = false, tempResult = false;
+            for (FileDetails fileDetails1 : fileDetailsList) {
+                result = (tempResult || !fileDetails1.getFilePath().contains("http"));
+                tempResult = result;
+            }
+            return result;
+        }
+        else
+            return false;
+
+    }
+
+    private static void downloadFile(String url, File outputFile) {
+        try {
+            URL u = new URL(url);
+            URLConnection conn = u.openConnection();
+            int contentLength = conn.getContentLength();
+
+            DataInputStream stream = new DataInputStream(u.openStream());
+
+            byte[] buffer = new byte[contentLength];
+            stream.readFully(buffer);
+            stream.close();
+
+            DataOutputStream fos = new DataOutputStream(new FileOutputStream(outputFile));
+            fos.write(buffer);
+            fos.flush();
+            fos.close();
+        } catch(FileNotFoundException e) {
+            return; // swallow a 404
+        } catch (IOException e) {
+            return; // swallow a 404
+        }
+    }
 }

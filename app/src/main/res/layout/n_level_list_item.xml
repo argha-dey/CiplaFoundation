@@ -6,6 +6,7 @@
     android:orientation="vertical" >
 
     <RadioButton
+        android:layout_gravity="right"
         android:id="@+id/rb_plusMinus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

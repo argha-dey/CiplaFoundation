@@ -1,38 +1,43 @@
 package com.ciplafoundation.activities;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.AdapterView;
-//import android.widget.CheckBox;
-import com.rey.material.widget.CheckBox;
-
-import android.widget.ArrayAdapter;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ciplafoundation.R;
-import com.ciplafoundation.dropdown.DropDownViewForXML;
 import com.ciplafoundation.interfaces.DropDownClickListener;
 import com.ciplafoundation.model.UserClass;
 import com.ciplafoundation.model.UserRole;
 import com.ciplafoundation.model.UserRoleClass;
+import com.ciplafoundation.notification.Config;
 import com.ciplafoundation.services.VolleyTaskManager;
+import com.ciplafoundation.utility.Prefs;
 import com.ciplafoundation.utility.ServerResponseCallback;
 import com.ciplafoundation.utility.Util;
-
+import com.rey.material.widget.CheckBox;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+
+//import android.widget.CheckBox;
 
 
 public class LoginActivity extends AppCompatActivity implements
@@ -45,11 +50,12 @@ public class LoginActivity extends AppCompatActivity implements
     private CheckBox chkbx_rememberMe;
     //private Spinner sp_role;
     private TextView tv_forgot_password;
-    private DropDownViewForXML dropdown_userRole;
+    private Prefs prefs;
+   // private DropDownViewForXML dropdown_userRole;
     private VolleyTaskManager volleyTaskManager;
     //protected DropDownClickListener DropDownClickListener;
     private Context context=LoginActivity.this;
-    private boolean isLoginService=false,isUserRoleService=false;
+    private boolean isLoginFirstService=false,isLoginSecondService=false,isUserRoleService=false;
     private ArrayList<UserRole> arrlistUserRole=new ArrayList<>();
     private UserClass user = new UserClass();
     private String userRoll_name="",userRole_id="";
@@ -66,21 +72,23 @@ public class LoginActivity extends AppCompatActivity implements
      * initializing view
      ************/
     private void init() {
+        prefs=new Prefs(LoginActivity.this);
+
         et_username = (EditText) findViewById(R.id.et_username);
         et_password = (EditText) findViewById(R.id.et_password);
-        dropdown_userRole = (DropDownViewForXML) findViewById(R.id.dropdown_role);
+     //   dropdown_userRole = (DropDownViewForXML) findViewById(R.id.dropdown_role);
         //sp_role = (Spinner)findViewById(R.id.sp_role) ;
         rl_username=(RelativeLayout)findViewById(R.id.rl_username);
         rl_password=(RelativeLayout)findViewById(R.id.rl_password);
         rl_role=(RelativeLayout)findViewById(R.id.rl_role);
         chkbx_rememberMe=(CheckBox)findViewById(R.id.chkbx_rememberMe);
         tv_forgot_password= (TextView)findViewById(R.id.tv_forgot_password);
-        tv_forgot_password.setOnClickListener(new View.OnClickListener() {
+     /*   tv_forgot_password.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Util.showMessageWithOk(context,"Password can be changed from Web!");
             }
-        });
+        });*/
 
         if(Util.fetchUserClass(LoginActivity.this) != null) {
             user = Util.fetchUserClass(LoginActivity.this);
@@ -90,8 +98,8 @@ public class LoginActivity extends AppCompatActivity implements
         {
             et_username.setText(user.getEmail());
             et_password.setText(user.getPassword());
-            dropdown_userRole.setTag(user.getRoleId());
-            dropdown_userRole.setText(user.getRole());
+         //   dropdown_userRole.setTag(user.getRoleId());
+         //   dropdown_userRole.setText(user.getRole());
             userRole_id=user.getRoleId();
             chkbx_rememberMe.setChecked(user.getIsRemember());
         }
@@ -114,10 +122,10 @@ public class LoginActivity extends AppCompatActivity implements
                 } else {
                     rl_username.setBackgroundResource(R.drawable.username_bg_normal);
                     et_username.setTextColor(getResources().getColor(R.color.logintext));
-                    if (Util.checkConnectivity(context))
+                    /*if (Util.checkConnectivity(context))
                         UserRoleWebServiceCalling(et_username.getText().toString());
                     else
-                        Util.showMessageWithOk(context, getString(R.string.no_internet));
+                        Util.showMessageWithOk(context, getString(R.string.no_internet));*/
 
                 }
             }
@@ -140,7 +148,7 @@ public class LoginActivity extends AppCompatActivity implements
         });
 
 
-        dropdown_userRole.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+       /* dropdown_userRole.setOnFocusChangeListener(new View.OnFocusChangeListener() {
 
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -154,10 +162,10 @@ public class LoginActivity extends AppCompatActivity implements
                     dropdown_userRole.setTextColor(getResources().getColor(R.color.logintext));
                 }
             }
-        });
+        });*/
 
 
-        dropdown_userRole.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        /*dropdown_userRole.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 userRoll_name = arrlistUserRole.get(position).getRole_name();
@@ -175,7 +183,7 @@ public class LoginActivity extends AppCompatActivity implements
                 rl_role.setBackgroundResource(R.drawable.username_bg_hover);
                 dropdown_userRole.setTextColor(getResources().getColor(R.color.logintext));
             }
-        });
+        });*/
     }
 
     /**
@@ -186,10 +194,10 @@ public class LoginActivity extends AppCompatActivity implements
                 et_password.getText().toString().length() == 0) {
             Util.showMessageWithOk(context, "Please fill all the required fields!");
         }
-        else if (dropdown_userRole.getText().toString().equalsIgnoreCase("Select")
+       /* else if (dropdown_userRole.getText().toString().equalsIgnoreCase("Select")
                 || dropdown_userRole.getText().toString().length() == 0) {
             Util.showMessageWithOk(context, "Please fill all the required fields!");
-        }
+        }*/
 
         else {
             if (Util.checkConnectivity(context))
@@ -208,6 +216,19 @@ public class LoginActivity extends AppCompatActivity implements
     }
 
 
+    /**
+     * Method to redirect to ForgotPassword in activity
+     */
+
+public void onForgotPasswordInClicked(View forgotPasswordview){
+    if(Util.checkConnectivity(context)){
+        openForgotPasswordActivity();
+    }
+
+}
+
+
+
     /*********************
      * Method to call User Role WebService
      ************************/
@@ -222,22 +243,77 @@ public class LoginActivity extends AppCompatActivity implements
      * Method to call Login WebService
      ************************/
     private void loginWebserviceCalling() {
+        if(Util.fetchUserClass(LoginActivity.this) != null) {
+            user = Util.fetchUserClass(LoginActivity.this);
+        }
+        SharedPreferences pref = context.getSharedPreferences(Config.SHARED_PREF, 0);
 
         HashMap<String, String> paramsMap = new HashMap<String, String>();
-        paramsMap.put("USR_EMAIL", et_username.getText().toString());
         paramsMap.put("USR_PASSWORD", et_password.getText().toString());
-        paramsMap.put("USR_ROLE_ID", userRole_id);
-        Log.v("Login",""+paramsMap);
-        isLoginService = true;
-        volleyTaskManager.doLogin(paramsMap, true);
-    }
+        paramsMap.put("devicetoken",pref.getString("TokenId", null));
+        paramsMap.put("USR_EMAIL", et_username.getText().toString());
+        paramsMap.put("deviceType", "A");
 
+        Log.v("Login",""+paramsMap);
+        isLoginFirstService = true;
+        volleyTaskManager.doLoginFirst(paramsMap, true);
+    }
+    /*********************
+     * Method to call Login WebService
+     ************************/
+    private void loginSecondWebserviceCalling(String roleId,String userEmail) {
+
+        HashMap<String, String> paramsMap = new HashMap<String, String>();
+        paramsMap.put("USR_EMAIL", userEmail);
+        paramsMap.put("USR_ROLE_ID", roleId);
+      //  Log.v("Login",""+paramsMap);
+        isLoginSecondService = true;
+        volleyTaskManager.doLoginSecond(paramsMap, true);
+    }
     @Override
     public void onSuccess(JSONObject resultJsonObject) {
 
-        if(isLoginService)
+        if(isLoginFirstService)
         {
-            isLoginService = false;
+            isLoginFirstService = false;
+            if (resultJsonObject.optString("status").equalsIgnoreCase("true")) {
+
+                Dialog dialog=new Dialog(LoginActivity.this);
+                dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                dialog.setContentView(R.layout.dialog_role);
+                dialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.MATCH_PARENT);
+                LinearLayout ll_role=(LinearLayout)dialog.findViewById(R.id.ll_role);
+                JSONArray jsonRole=resultJsonObject.optJSONArray("user_roles");
+                if(jsonRole!=null && jsonRole.length()>0)
+                {
+                    for(int i=0;i<jsonRole.length();i++)
+                    {
+                        View view= LayoutInflater.from(LoginActivity.this).inflate(R.layout.view_btnrole,null);
+                        final Button btnRole=(Button)view.findViewById(R.id.btn_role);
+                        btnRole.setText(jsonRole.optJSONObject(i).optString("ROLE_SALUTE"));
+                        btnRole.setTag(jsonRole.optJSONObject(i).optString("ROLE_ID"));
+
+                        ll_role.addView(view);
+
+                        btnRole.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                loginSecondWebserviceCalling(btnRole.getTag().toString(),et_username.getText().toString());
+                            }
+                        });
+                    }
+                }
+                dialog.setCancelable(false);
+                dialog.show();
+
+            } else {
+                Util.showMessageWithOk(context, "Login failed !!!");
+            }
+        }
+
+        if(isLoginSecondService)
+        {
+            isLoginSecondService = false;
             if (resultJsonObject.optString("status").equalsIgnoreCase("true")) {
                 Log.v("Login","Success");
                 user.setName(resultJsonObject.optString("name"));
@@ -269,22 +345,23 @@ public class LoginActivity extends AppCompatActivity implements
                         JSONObject detailsJsonObject = detailsJsonArray.optJSONObject(i);
 
                         UserRole userRole=new UserRole();
-                        userRole.setRole_id(detailsJsonObject.optString("role_id"));
-                        userRole.setRole_name(detailsJsonObject.optString("role_name"));
+                        userRole.setRoleId(detailsJsonObject.optString("role_id"));
+                        userRole.setUserName(detailsJsonObject.optString("role_name"));
                         arrlistUserRole.add(userRole);
                         useRollClass.setDetails(arrlistUserRole);
                     }
                 }
-                populateUserRoleList();
+                //populateUserRoleList();
 
             } else {
                 Toast.makeText(context,"No user role Found !!!",Toast.LENGTH_SHORT).show();
                 //Util.showMessageWithOk(context, "No user role Found !!!");
                 arrlistUserRole.clear();
-                populateUserRoleList();
+                //populateUserRoleList();
             }
         }
 
+        Log.d("test","resultJsonObject----"+resultJsonObject);
 
     }
 
@@ -293,7 +370,7 @@ public class LoginActivity extends AppCompatActivity implements
 
     }
 
-    private void populateUserRoleList()
+  /*  private void populateUserRoleList()
     {
         if (arrlistUserRole.size() > 0) {
             dropdown_userRole.setEnabled(true);
@@ -319,15 +396,28 @@ public class LoginActivity extends AppCompatActivity implements
 
         }
 
-    }
+    }*/
 
 
 
     /*********************GOTO Home ************************/
     private void openMapActivity() {
-        Intent intent = new Intent(LoginActivity.this, MapActivity.class);
+
+            Intent intent = new Intent(LoginActivity.this, MapActivity.class);
+    startActivity(intent);
+    finish();
+
+}
+
+
+    private void openForgotPasswordActivity() {
+
+        Intent intent = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
         startActivity(intent);
+        overridePendingTransition(R.anim.activity_right_in, R.anim.activity_right_out);
         finish();
+
+
     }
 
     protected void setDropDownSelectListener(DropDownClickListener DropDownClickListener) {

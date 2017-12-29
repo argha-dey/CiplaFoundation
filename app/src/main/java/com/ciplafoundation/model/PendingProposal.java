@@ -19,6 +19,34 @@ public class PendingProposal implements Serializable {
     private String budget;
     private String created_by;
     private String created_date;
+    private String cost_treatment;
+
+    public String getCost_treatment() {
+        return cost_treatment;
+    }
+
+    public void setCost_treatment(String cost_treatment) {
+        this.cost_treatment = cost_treatment;
+    }
+
+    public String getFund_requested() {
+        return fund_requested;
+    }
+
+    public void setFund_requested(String fund_requested) {
+        this.fund_requested = fund_requested;
+    }
+
+    public String getSanctioned_amount() {
+        return sanctioned_amount;
+    }
+
+    public void setSanctioned_amount(String sanctioned_amount) {
+        this.sanctioned_amount = sanctioned_amount;
+    }
+
+    private String fund_requested;
+    private String sanctioned_amount;
 
     public String getId() {
         return id;

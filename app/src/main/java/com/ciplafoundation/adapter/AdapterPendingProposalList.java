@@ -1,33 +1,29 @@
 
 package com.ciplafoundation.adapter;
 
-        import android.content.Context;
-        import android.graphics.Color;
-        import android.support.v7.widget.RecyclerView;
-        import android.text.SpannableString;
-        import android.text.SpannableStringBuilder;
-        import android.text.style.ForegroundColorSpan;
-        import android.util.Log;
-        import android.view.LayoutInflater;
-        import android.view.View;
-        import android.view.ViewGroup;
-        import android.view.animation.AnimationUtils;
-        import android.widget.ImageButton;
-        import android.widget.ImageView;
-        import android.widget.RelativeLayout;
-        import android.widget.TextView;
-        import com.ciplafoundation.R;
-        import com.ciplafoundation.model.PendingProposal;
-        import com.ciplafoundation.model.UserClass;
-        import com.ciplafoundation.services.VolleyTaskManager;
-        import com.ciplafoundation.utility.Prefs;
-        import com.ciplafoundation.utility.ServerResponseCallback;
-        import com.ciplafoundation.utility.Util;
+import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
-        import org.json.JSONObject;
+import com.ciplafoundation.R;
+import com.ciplafoundation.activities.FragmentBaseActivity;
+import com.ciplafoundation.model.PendingProposal;
+import com.ciplafoundation.model.UserClass;
+import com.ciplafoundation.services.VolleyTaskManager;
+import com.ciplafoundation.utility.Prefs;
+import com.ciplafoundation.utility.Util;
 
-        import java.text.DecimalFormat;
-        import java.util.ArrayList;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 
 
@@ -136,13 +132,22 @@ public class AdapterPendingProposalList extends RecyclerView.Adapter<AdapterPend
                 if(Util.checkConnectivity(mContext))
                 {
                     user=Util.fetchUserClass(mContext);
+                    prefs=new Prefs(mContext);
                     String id=pendingProposalList.get(position).getId();
                     String user_id=user.getUserId();
-                    String params="USR_USER_ID="+user_id+"&ID="+id;
-                    prefs=new Prefs(mContext);
-                    prefs.setIsProjectDetails(true);
+                    String division_id = prefs.getDivisionId();
                     //isProposalDetails=true;
-                    volleyTaskManager.doGetProposalDetails(params,true);
+                    if(FragmentBaseActivity.task!=null && FragmentBaseActivity.task.equalsIgnoreCase("project")) {
+                        String paramMap="USR_USER_ID="+user_id+"&ID="+id+"&DIVISION_ID="+division_id;
+                        volleyTaskManager.doGetProjectDetails(paramMap, true);
+                        prefs.setIsProjectDetails(true);
+                    }
+                    else {
+                        String role_id=user.getRoleId();
+                        String paramMaps="USR_USER_ID="+user_id+"&ID="+id+"&DIVISION_ID="+division_id+"&ROLE_ID="+role_id;
+                        volleyTaskManager.doGetProposalDetails(paramMaps, true);
+                        prefs.setIsProposalDetails(true);
+                    }
                 }
                 else
                 Util.showMessageWithOk(mContext,mContext.getString(R.string.no_internet));

@@ -99,7 +99,8 @@
         android:layout_height="45dp"
         android:layout_below="@+id/rl_password"
         android:layout_marginBottom="7dp"
-        android:background="@drawable/username_bg_normal">
+        android:background="@drawable/username_bg_normal"
+        android:visibility="gone">
 
         <ImageView
             android:id="@+id/iv_search"
@@ -168,7 +169,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
-            android:clickable="true"
+            android:onClick="onForgotPasswordInClicked"
             android:text="Forgot password?"
             android:layout_alignParentRight="true"
             android:textColor="@color/logintext"/>

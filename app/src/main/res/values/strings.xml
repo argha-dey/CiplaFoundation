@@ -10,12 +10,15 @@
     <string name="proposal">PROPOSAL</string>
     <string name="project">PROJECT</string>
     <string name="event">EVENT</string>
+    <string name="medicalgrant">MEDICAL GRANT</string>
+    <string name="dashboard">DASHBOARD</string>
     <string name="general">GENERAL INFORMATION</string>
     <string name="schedule">Schedule VII of Section 135</string>
     <string name="type">Type of Organization</string>
     <string name="ngo">NGO/Vendor</string>
     <string name="fund_duration">Duration of Funding</string>
     <string name="proposal_det">PROPOSAL DETAILS</string>
+    <string name="medical_proposal_details">MEDICAL GRANT DETAILS</string>
     <string name="title">Proposal Title</string>
     <string name="proposal_det_brief">Proposal Details in Brief</string>
     <string name="timeline">Timeline of Project</string>
@@ -28,10 +31,23 @@
     <string name="distance">Distance from Unit(Km)</string>
     <string name="benificiary">Profile of Benificiaries</string>
     <string name="rationale">Rationale for this Project</string>
-
+    <string name="fund_distribution">FUND DISTRIBUTION</string>
+    
+    <string name="family_details">FAMILY DETAILS</string>
+    <string name="delivarable_distribution">DELIVERABLE WISE DISTRIBUTION</string>
+    <string name="financial_medical_grant">FRIANCIAL MEDICAL GRANT</string>
+    <string name="document_attach">DOCUMENTS ATTACHED</string>
+    <string name="pan">PAN</string>
+    <string name="pan_details">Payments Details</string>
     <string name="raavi_bold">font/RAAVIB_3.ttf</string>
     <string name="raavi_regular">font/RAAVI_3.ttf</string>
 
-
-
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="text_title"><font color="#E72A02">*</font> Title</string>
+    <string name="text_organisedOn"><font color="#E72A02">*</font> Organized On</string>
+    <string name="text_venue"><font color="#E72A02">*</font> Venue</string>
+    <string name="text_organisedBy"><font color="#E72A02">*</font> Organized By</string>
+    <string name="text_objective"><font color="#E72A02">*</font> Objective</string>
+    <string name="text_description"><font color="#E72A02">*</font> Description</string>
 </resources>

@@ -8,6 +8,7 @@
     <color name="grey">#CFCFCF</color>
     <color name="red">#f44545</color>
     <color name="login_btn_clicked">#cc0164a7</color>
+
     <color name="login_btn_unclicked">#0164a7</color>
     <color name="login_btn_unclicked_20">#330164a7</color>
     <color name="logintext">#252525</color>
@@ -24,6 +25,8 @@
     <color name="listColor">#e4e4e4</color>
     <color name="pending">#f89406</color>
     <color name="approved">#8bb809</color>
+    <color name="closed">#bb0009</color>
+    <color name="fragmentColor">#fbfcfb</color>
 
 </resources>
 

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,7 +17,6 @@ import com.ciplafoundation.R;
 import com.ciplafoundation.activities.FragmentBaseActivity;
 import com.ciplafoundation.adapter.AdapterApprovedProposalList;
 import com.ciplafoundation.model.AcceptedProposal;
-import com.ciplafoundation.model.DataProposalList;
 import com.ciplafoundation.utility.Util;
 
 import java.util.ArrayList;
@@ -33,25 +31,29 @@ public class FragmentApproved extends Fragment
 
     private Activity activity;
     private static TextView tv_heading;
-    private static LinearLayout ll_pending_approved;
+    private static LinearLayout ll_pending_approved,search_layout;
     private TextView tv_noRecord;
     private RecyclerView rv_approved_proposal_list;
     private FragmentTransaction fragmentTransaction;
     private LinearLayoutManager mApproveLayoutManager;
     private AdapterApprovedProposalList adapterApprovedProposalList;
+    private String headerText="Approved Proposal List";
     //private SwipeRefreshLayout swipeRefreshLayout;
 
     public static FragmentApproved newInstance(TextView _tv_heading,LinearLayout _ll_pending_approved) {
+
         FragmentApproved f = new FragmentApproved();
         Bundle b = new Bundle();
         f.setArguments(b);
         tv_heading=_tv_heading;
         ll_pending_approved=_ll_pending_approved;
+
         return f;
     }
 
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        //Log.d("test","Fragment Approved");
         View rootView = inflater.inflate(R.layout.fragment_approved, container, false);
 
         initComponent(rootView);
@@ -80,11 +82,15 @@ public class FragmentApproved extends Fragment
         tv_heading.setVisibility(View.VISIBLE);
         mApproveLayoutManager = new LinearLayoutManager(activity);
         rv_approved_proposal_list.setLayoutManager(mApproveLayoutManager);
-        adapterApprovedProposalList = new AdapterApprovedProposalList(activity);
+        adapterApprovedProposalList = new AdapterApprovedProposalList(activity,rv_approved_proposal_list);
         ArrayList<AcceptedProposal> arrApprovedProposal= Util.fetchAcceptedProposal(activity);
+
+        if(FragmentBaseActivity.task!=null && FragmentBaseActivity.task.equalsIgnoreCase("project"))
+            headerText="Approved Project List";
+
         if(arrApprovedProposal!=null && arrApprovedProposal.size()>0)
         {
-            tv_heading.setText("Approved Proposal List");
+            tv_heading.setText(headerText);
             tv_heading.setTextColor(getContext().getResources().getColor(R.color.approved));
             tv_noRecord.setVisibility(View.GONE);
             adapterApprovedProposalList.AddArray(arrApprovedProposal);
@@ -92,7 +98,7 @@ public class FragmentApproved extends Fragment
         }
         else
         {
-            tv_heading.setText("Approved Proposal List");
+            tv_heading.setText(headerText);
             tv_heading.setTextColor(getContext().getResources().getColor(R.color.approved));
             tv_noRecord.setVisibility(View.VISIBLE);
             rv_approved_proposal_list.setVisibility(View.GONE);

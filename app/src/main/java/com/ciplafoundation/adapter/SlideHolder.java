@@ -676,7 +676,7 @@ public class SlideHolder extends FrameLayout {
 
 // define Speed of Slider
 
-        private static final float SPEED = 0.6f;
+        private static final float SPEED = 0.9f;
 
         private float mStart;
         private float mEnd;
